@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>principal</title>
+	<link rel="preconnect" href="https://fonts.gstatic.com">
+	<link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100;0,30
+	0;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&family=Montserrat:wght@700;800;900&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="css/bootstrap.css">
+	<link rel="stylesheet" href="css/bootstrap-theme.css">
+	<link rel="stylesheet" href="css/bootstrapValidator.css">
+	<link rel="stylesheet" type="text/css" href="static/css/style_principal.css" th:href="@{/css/style_principal.css}"/>  
+	<script src="https://kit.fontawesome.com/d3f2cbc780.js" crossorigin="anonymous"></script>
+</head>
+<body>
+	<div class="hero" id="hero">
+			<nav >
+				<a href="/inicio/retornar" style="text-decoration: none"><h2 class="logo">Pet Shop <span>Panchitos</span></h2> </a>
+				<ul >					
+					<li ><a href="/producto/catalogo" >Catalogo</a></li>
+					<li th:if="${usuario.cod_tipo == 1}" ><a href="/usuario/listar" class="nav-link">Mant. Usuario</a></li>
+					<li th:if="${usuario.cod_tipo == 1}"><a href="/producto/listar" class="nav-link">Mant. Producto</a></li>
+					<li><a href="/inicio/sedes">Nuestras sedes</a></li>
+					
+				</ul>
+				<a href="/login/cargar" type="button" class="cta">Cerrar Sesion</a>
+			</nav>
+			<br>
+			<br>
+			<h1>¡Bienvenido <strong th:text="${usuario.nom_usu}"></strong>!</h1>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<header id="boton">
+		
+			<div>
+				<a href="/producto/catalogo" type="button" class="cta">Ver productos</a>
+				<a href="#" type="button" class="cta">ir a comprar</a>
+			</div>
+	</header>
+	</div>
+	<section class="events">
+		<div class="title">
+			<h1>PANCHITOS</h1> 
+			<div class="line"></div>
+		
+		</div>
+		<div class="row">
+			<div class="col">
+				<img src="./img/delivery.png" alt="" th:src="@{/img/delivery.png}">
+				<h4>Delivery a todo el Perú</h4>
+				<p>Contamos con cobertura de entregas en todo Lima y provincias. Seguimos estrictos protocolos de entrega para que tu producto llegue siempre seguro y en óptimas condiciones.</p>
+			</div>
+			<div class="col">
+				<img src="./img/comprar.png" alt="" th:src="@{/img/comprar.png}">
+				<h4>Asesoría y compra segura en línea</h4>
+				<p>Tu compra está 100% segura a través de nuestra pasarela de pagos cifrada. Aceptamos todas las tarjetas de crédito y te ofrecemos canales de atención personalizados para que tengas la mejor experiencia de compra.</p>
+			</div>
+		</div>
+	</section>
+	
+	<br>
+	
+		<br>
+		
+		<h1 style="text-align:center; color:black; text-shadow: 2px 2px 2px #ea1538;">PRODUCTOS:</h1>
+		<br>
+		
+		<div class="container" style="margin: auto">
+			    <div th:each="p : ${lstProductos}">
+			    <div class="card">
+			    <figure>
+			    <img th:src="@{/img/{id}.jpeg(id=${p.cod_prod})}"  >
+			    </figure>
+			    <div class="contenido">
+			      <h1 class="descripcion" th:text="${p.desc_prod}"></h1>
+			      <h2 class="precio" th:text="${#numbers.formatCurrency(p.precio)}"></h2>
+				</div>
+			    
+			      		<form action="#" method="post">
+			      			<input type="hidden" name="cod_prod" th:value="${p.cod_prod}">
+			      			<button type="submit" class="btn">  Detalle  </button>
+			      		</form>
+			      </div>
+			     
+			    </div>
+ 
+    	 </div>
+	<br>
+	<br>
+	<footer th:fragment="footer">
+		<div class="container_footer">
+			<div class="box_footer">
+				<div class="logo">
+					<h2 class="logo">Pet Shop Panchitos</h2>
+				</div>
+				<div class="terms">
+					<p>Pet shop Panchitos ama tanto a tu mascota como lo haces tu. ¡Ecuentra de todo para el engreido de la casa! Visitanos y comprueba la variedad de productos que tenemos para ti.</p>
+				</div>
+			</div>
+			<div class="box_footer">
+				<h2>Soluciones</h2>
+				<a href="#">App Desarrollo</a>
+				<a href="#">App Marketing</a>
+				<a href="#">IOS Desarrollo</a>
+				<a href="#">Android Desarrollo</a>
+			</div>
+			<div class="box_footer">
+				<h2>Compañia</h2>
+				<a href="#">Acerca de</a>
+				<a href="#">Trabajos</a>
+				<a href="#">Procesos</a>
+				<a href="#">Servicios</a>
+			</div>
+			<div class="box_footer">
+				<h2>Redes Sociales</h2>
+				<a href="#"><i class="fab fa-facebook-square"></i> Facebook</a>
+				<a href="#"><i class="fab fa-twitter-square"></i> Twitter</a>
+				<a href="#"><i class="fab fa-linkedin"></i> Linkedin</a>
+				<a href="#"><i class="fab fa-instagram-square"></i> Instagram</a>
+			</div>
+			
+		</div>
+		<div class="box_copyright">
+			<hr>
+			<p>Todos los derechos reservados ® 2022 <b>Pet Shop Panchitos</b></p>
+		</div>
+			<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+			<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+			<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+			
+		</footer>
+	</body>
+			
+</html>

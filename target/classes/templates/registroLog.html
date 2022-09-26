@@ -1,0 +1,96 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+	integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+	crossorigin="anonymous">
+<head>
+<title>Getting Started: Serving Web Content</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css">
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link
+	href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100;0,30
+	0;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&family=Montserrat:wght@700;800;900&display=swap"
+	rel="stylesheet">
+<link rel="stylesheet" href="css/bootstrap.css">
+<link rel="stylesheet" href="css/bootstrap-theme.css">
+<link rel="stylesheet" href="css/bootstrapValidator.css">
+<link rel="stylesheet" type="text/css" href="static/css/registrarse.css"
+	th:href="@{/css/registrarse.css}" />
+</head>
+<body>
+	<div class="hero" id="hero">
+		<nav>
+			<h2 class="logo">
+				Pet Shop <span>Panchitos</span>
+			</h2>
+			<a href="/usuario/guardar" type="button" class="cta">Cerrar Sesion</a>
+		</nav>
+	</div>
+	<div class="formulario">
+		<h1 style="text-align: center;">Registro de Cliente</h1>
+		<form action="/usuario/guardar" method="post" th:object="${usuario}">
+			<div class="form-group">
+				<label for="inputNombre">Nombre</label> <input type="text"
+					th:field="*{nom_usu}" class="form-control" id="inputEmail4"
+					placeholder="Ingrese su Nombre">
+			</div>
+			<div class="form-group">
+				<label for="inputApellido">Apellido</label> <input type="text"
+					th:field="*{apel_usu}" class="form-control" id="inputPassword4"
+					placeholder="Ingrese su Apellido">
+			</div>
+			<div class="form-row">
+				<div class="form-group col-md-6">
+					<label for="inputCorreo">Usuario</label> <input type="email"
+						th:field="*{usuario}" class="form-control" id="inputAddress"
+						placeholder="Ingrese su email">
+				</div>
+				<div class="form-group col-md-6">
+					<label for="inputClave">Clave</label> <input type="password"
+						th:field="*{contrasenia}" class="form-control" id="inputAddress2"
+						placeholder="Ingrese su Clave">
+				</div>
+				<div class="form-group col-md-6">
+					<label for="inputFecNac">Telefono</label> <input type="number"
+						th:field="*{telefono}" class="form-control" id="inputAddress2"
+						placeholder="Ingrese su telefono">
+				</div>
+				<div class="form-group col-md-6">
+					<label for="inputFecNac">DNI</label> <input type="number"
+						th:field="*{dni_usu}" class="form-control" id="inputAddress2"
+						placeholder="Ingrese su numero de DNI">
+				</div>
+				<div class="form-group col-md-4">
+			      <label for="inputCat">Tipo</label>
+			      <select id="inputCat" th:field="*{cod_tipo}" class="form-control">
+			        <option value="-1">Seleccione...</option>
+			        <option th:each="t : ${lstTipos}" th:value="${t.cod_tipo}" th:text="${t.desc_tipo}"></option>
+			      </select>
+			    </div>
+			</div>
+
+			<button type="submit" class="btn btn-primary">Registrar</button>
+			<br>
+			<br>
+			<a href="/usuario/listar" class="btn btn-primary">Regresar</a>
+			<br>
+		</form>
+		<br>
+		<div th:text="${mensaje}"></div>
+	</div>
+</body>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+	integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+	crossorigin="anonymous"></script>
+<script
+	src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
+	integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+	crossorigin="anonymous"></script>
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
+	integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+	crossorigin="anonymous"></script>
+</html>

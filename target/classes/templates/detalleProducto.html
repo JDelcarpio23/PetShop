@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+	<div class="container">
+	<div class="card bg-light">
+	
+	<div class="card-body">
+		<img class="img-thumbnail rounded float-left"
+			 th:src="@{'/productos/'+${producto.img}}"
+			 th:alt="${producto.img}"
+			 style="max-width:25%;">
+			 <ul class="list group">
+			 	<li class="list-group-item" th:text="'Nombre Producto: ' +${producto.desc_prod}">
+			 </ul>
+	</div>
+	</div>
+	</div>
+</body>
+</html>

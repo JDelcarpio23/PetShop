@@ -1,0 +1,104 @@
+@charset "ISO-8859-1";
+*{
+	padding: 0;
+	margin: 0;
+	box-sizing: border-box;
+	font-family: 'Josefin Sans', sans-serif;
+}
+body {
+	background: #251F22;
+}
+
+.row{
+	background: white;
+	border-radius: 30px;
+	box-shadow:12px 12px 22px #ea1538;
+}
+img{
+	border-top-left-radius: 30px;
+	border-bottom-left-radius: 30px;
+}
+.btn1{
+	border:none;
+	outline:none;
+	height: 50px;
+	width:100%;
+	background-color: #FF3030;
+	color:white;
+	border-radius: 4px;
+	font-weight: bold;
+	box-shadow:3px 3px 9px grey;	
+}
+.btn2{
+	border:1px solid;
+	outline:none;
+	height: 50px;
+	width:100%;
+	background-color: white;
+	color:black;
+	border-radius: 4px;
+	font-weight: bold;	
+	box-shadow:3px 3px 9px grey;
+}
+.btn1:hover{
+	background:white;
+	border:1px solid;
+	color: #FF3030;
+}
+
+/*logo y registrarse*/
+nav{
+	display: flex;
+	align-items: center;
+	justify-content:  space-between;
+	padding-top: 40px;
+	padding-left: 10%;
+	padding-right: 10%; 
+}
+.logo{
+	color :white;
+	font-size: 28px;
+	}
+span{
+	color: #ea1538;
+}
+nav ul li a{
+	color: white;
+	text-decoration: none;
+	font-weight: bold;
+}
+nav ul li a:hover{
+	color: #ea1538;
+	transition:.3s;
+}
+#hero .cta{
+	border:none;
+	background: #ea1538;
+	padding: 12px 30px;
+	border-radius: 30px;
+	color: white;
+	font-weight: bold;
+	font-size: 15px;
+	transition:.4s;
+	text-decoration: none;
+}
+#hero .cta:hover{
+	transform:scale(1.3);
+	cursor:pointer;	
+}
+button{
+	border:none;
+	background: #ea1538;
+	padding: 12px 30px;
+	border-radius: 30px;
+	color: white;
+	font-weight: bold;
+	font-size: 15px;
+	transition:.4s;
+}
+button:hover {
+	transform:scale(1.0);
+	cursor:pointer;	
+}
+/*termina nav*/
+

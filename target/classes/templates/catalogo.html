@@ -1,0 +1,114 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<link rel="stylesheet" type="text/css" href="static/css/footer.css" th:href="@{/css/footer.css}"/> 
+<script src="https://kit.fontawesome.com/d3f2cbc780.js" crossorigin="anonymous"></script>
+<link rel="preconnect" href="https://fonts.gstatic.com">
+	<link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100;0,30
+	0;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&family=Montserrat:wght@700;800;900&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="css/bootstrap.css">
+	<link rel="stylesheet" href="css/bootstrap-theme.css">
+	<link rel="stylesheet" href="css/bootstrapValidator.css"> 
+    <link rel="stylesheet" type="text/css" href="static/css/nav.css" th:href="@{/css/nav.css}"  />
+    <link rel="stylesheet" type="text/css" href="static/css/producto_listado.css" th:href="@{/css/producto_listado.css}"  />
+<head> 
+
+    <title>Proyecto PET</title> 
+	
+    
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+
+<body>
+    
+    <main>
+   <div class="hero" id="hero">
+			<nav th:fragment="nav">
+				<a href="/inicio/retornar" style="text-decoration: none"><h2 class="logo">Pet Shop <span>Panchitos</span></h2> </a>
+				<ul >					
+					<li ><a href="/producto/catalogo" >Catalogo</a></li>
+					<li th:if="${usuario.cod_tipo == 1}"><a href="/usuario/listar" class="nav-link">Mant. Usuario</a></li>
+					<li th:if="${usuario.cod_tipo == 1}"><a href="/producto/listar" class="nav-link">Mant. Producto</a></li>
+					<li><a href="/inicio/sedes">Nuestras sedes</a></li>					
+				</ul>
+				<a href="/login/cargar" type="button" class="cta">Cerrar Sesion</a>
+			</nav>
+		</div>
+		<br>
+		<br>
+		<h1 style="color:white; text-align: center; text-shadow: 2px 2px 2px #ea1538;">CATALOGO DE PRODUCTOS</h1>
+		<br>
+		
+		<div class="container" style="max-width:1200px;">
+			    <div th:each="p : ${lstProductos}">
+			    <div class="card">
+			    <figure>
+			    <img th:src="@{/img/{id}.jpeg(id=${p.cod_prod})}"  >
+			    </figure>
+			    <div class="contenido">
+			      <h1 class="descripcion" th:text="${p.desc_prod}"></h1>
+			      <h2 class="precio" th:text="${#numbers.formatCurrency(p.precio)}"></h2>
+				</div>
+			    
+			      		<form action="#" method="post">
+			      			<input type="hidden" name="cod_prod" th:value="${p.cod_prod}">
+			      			<button type="submit" class="btn" style="margin-left: 40%;">  Detalle  </button>
+			      		</form>
+			      </div>
+			     
+			    </div>
+    	
+    	 </div>
+  
+	</main>
+	
+    
+    <br>
+    <br>
+    <footer th:fragment="footer">
+		<div class="container_footer">
+			<div class="box_footer">
+				<div class="logo">
+					<h2 class="logo">Pet Shop Panchitos</h2>
+				</div>
+				<div class="terms">
+					<p>Pet shop Panchitos ama tanto a tu mascota como lo haces tu. ¡Ecuentra de todo para el engreido de la casa! Visitanos y comprueba la variedad de productos que tenemos para ti.</p>
+				</div>
+			</div>
+			<div class="box_footer">
+				<h2>Soluciones</h2>
+				<a href="#">App Desarrollo</a>
+				<a href="#">App Marketing</a>
+				<a href="#">IOS Desarrollo</a>
+				<a href="#">Android Desarrollo</a>
+			</div>
+			<div class="box_footer">
+				<h2>Compañia</h2>
+				<a href="#">Acerca de</a>
+				<a href="#">Trabajos</a>
+				<a href="#">Procesos</a>
+				<a href="#">Servicios</a>
+			</div>
+			<div class="box_footer">
+				<h2>Redes Sociales</h2>
+				<a href="#"><i class="fab fa-facebook-square"></i> Facebook</a>
+				<a href="#"><i class="fab fa-twitter-square"></i> Twitter</a>
+				<a href="#"><i class="fab fa-linkedin"></i> Linkedin</a>
+				<a href="#"><i class="fab fa-instagram-square"></i> Instagram</a>
+			</div>
+			
+		</div>
+		<div class="box_copyright">
+			<hr>
+			<p>Todos los derechos reservados ® 2022 <b>Pet Shop Panchitos</b></p>
+		</div>
+			<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+			<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+			<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+			
+		</footer>
+</body>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</html>
