@@ -49,16 +49,20 @@
 			      <h1 class="descripcion" th:text="${p.desc_prod}"></h1>
 			      <h2 class="precio" th:text="${#numbers.formatCurrency(p.precio)}"></h2>
 				</div>
-			    
-			      		<form action="#" method="post">
+				<div class="form-row">
+					<form action="#" method="post">
 			      			<input type="hidden" name="cod_prod" th:value="${p.cod_prod}">
 			      			<button type="submit" class="btn" style="margin-left: 40%;">  Detalle  </button>
 			      		</form>
 			      		
 			      		<form action="#" method="post">
 			      			<input type="hidden" name="cod_prod" th:value="${p.cod_prod}">
-			      			<button type="submit" class="btn" style="margin-left: 40%;">  Agregar al Carrito  </button>
+			      			<button type="submit" class="btn" style="margin-left: 40%;"> Añadir al Carrito</button>
 			      		</form>
+				
+				</div>
+			    
+			      		
 			      </div>
 			     
 			    </div>
