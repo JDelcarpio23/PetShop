@@ -34,7 +34,7 @@ public class ProductoService {
 	
 	public Producto obtenerProducto(Integer codproducto) {
 		
-		return repop.getById(codproducto);
+		return repop.findById(codproducto).get();
 	}
 	
 	public void eliminarProducto(Integer codproducto){
