@@ -139,4 +139,15 @@ System.out.println(p);
 		return "detalleProducto";
 	}
 	
+	/*CONTROLADOR PARA DETALLE PRODUCTO - FREDY*/
+	@PostMapping("/producto/detalles")
+	public String detalleProd(@ModelAttribute Usuario usuario,@ModelAttribute Producto p, Model model) {
+		model.addAttribute("producto", repop.findById(p.getCod_prod()));
+		model.addAttribute("lstCategorias",repoc.findAll());
+		
+		model.addAttribute("lstCategorias",repoc.findAll());
+		usuario = repou.findById(com.pet.util.Constantes.CODIGO).get();
+		return "detalleProducto";
+	}
+	
 }

@@ -1,6 +1,6 @@
 package com.pet.Services;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,9 +14,24 @@ public class ProductoService {
 	@Autowired
 	private IProductoRepository repop;
 	
-	public ArrayList<Producto> obtenerProductos(){
+	public List<Producto> obtenerProductos(){
 		
-		return (ArrayList<Producto>)repop.findAll();
+		return repop.findAll();
+	};
+	
+	public Producto grabarProducto(Producto p){
+		
+		return repop.save(p);
+	};
+	
+	public Producto obtenerProducto(Integer codproducto) {
+		
+		return repop.findById(codproducto).get();
+	}
+	
+	public void eliminarProducto(Integer codproducto){
+		
+		repop.deleteById(codproducto);
 	};
 	
 	

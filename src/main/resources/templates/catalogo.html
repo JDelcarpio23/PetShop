@@ -50,7 +50,7 @@
 			      <h2 class="precio" th:text="${#numbers.formatCurrency(p.precio)}"></h2>
 				</div>
 				<div class="form-row">
-					<form action="#" method="post">
+					<form action="/producto/detalles" method="post">
 			      			<input type="hidden" name="cod_prod" th:value="${p.cod_prod}">
 			      			<button type="submit" class="btn" style="margin-left: 40%;">  Detalle  </button>
 			      		</form>
