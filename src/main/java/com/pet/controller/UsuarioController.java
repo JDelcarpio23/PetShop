@@ -112,7 +112,7 @@ public class UsuarioController {
 		System.out.println("Enviado " + usuario);
 		
 		try {
-			usuario.setCod_usu(usuario.getNom_usu().substring(0,2)+usuario.getApel_usu().substring(0, 2)+usuario.getDni_usu());
+			usuario.setCod_usu(usuario.getDni_usu());
 			usuario.setCod_tipo(2);
 			repoU.save(usuario);			
 			model.addAttribute("mensaje", "Usuario Registrado");
