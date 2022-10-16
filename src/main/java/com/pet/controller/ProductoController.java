@@ -6,6 +6,7 @@ import com.pet.repository.ICategoriaRepository;
 import com.pet.repository.IProductoRepository;
 import com.pet.repository.IUsuarioRepository;
 
+
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -25,6 +26,8 @@ import org.springframework.web.multipart.MultipartFile;
 @Controller
 public class ProductoController {
 
+
+	
 	@Autowired
 	private IProductoRepository repop;
 	
@@ -147,7 +150,11 @@ System.out.println(p);
 		
 		model.addAttribute("lstCategorias",repoc.findAll());
 		usuario = repou.findById(com.pet.util.Constantes.CODIGO).get();
+		model.addAttribute("usuario", usuario);
+		
+		
 		return "detalleProducto";
 	}
+	
 	
 }
