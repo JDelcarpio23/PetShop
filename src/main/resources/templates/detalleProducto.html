@@ -42,7 +42,8 @@
 	<div class="formulario" style=" display: flex; justify-content: center;  ">
  		<div class="card mb-4" style="width: 30%; display: flex; justify-content: center;align-items: center; background-color:#251F22 ;">
     		
-    		<img style="width: 75%; height: 100%; " src="/img/1.jpeg">	
+    		<img style="width: 75%; height: 100%; " th:src="@{/img/{id}.jpeg(id=${producto.cod_prod})}">
+    		<p th:text="${producto.desc_prod}"></p>	
     		
    		</div>
     		
