@@ -52,7 +52,7 @@ public class ProductoController {
 	@GetMapping("/producto/catalogo")
 	public String catalogo(@ModelAttribute Usuario usuario, Model model) {
 		
-		com.pet.util.Constantes.CODIGOPROD = 0;
+		com.pet.util.Constantes.CODIGOPROD = 1;
 		
 		model.addAttribute("lstProductos", repop.findAll());
 		
