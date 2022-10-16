@@ -129,23 +129,31 @@ public class UsuarioController {
 	
 	@GetMapping("/usuario/listar")
 	public String listaUsuarios(@ModelAttribute Usuario usuario, Model model) {
+		
+		if (com.pet.util.Constantes.TIPO == 1){
 		model.addAttribute("lstUsuarios", repoU.findAll());
 
 		usuario = repoU.findById(com.pet.util.Constantes.CODIGO).get();
 		model.addAttribute("usuario", usuario);
 		return "listadoUsuarios";
+		}else {
+			return "login";
+		}
+		
 	}
 	
 	@GetMapping("/mantenimiento/usuario")
-	public String abrirCrud(@ModelAttribute Usuario usuario, Model model) {
-		model.addAttribute("usuario", new Usuario());
+	public String abrirCrud(@ModelAttribute Usuario usuario, Model model) {		
+			
+			model.addAttribute("usuario", new Usuario());
 
-		model.addAttribute("lstTipos",repoT.findAll());
+			model.addAttribute("lstTipos",repoT.findAll());
+			
+			usuario = repoU.findById(com.pet.util.Constantes.CODIGO).get();
+			model.addAttribute("usuario", usuario);
+			
+			return "crudUsuarios";		
 		
-		usuario = repoU.findById(com.pet.util.Constantes.CODIGO).get();
-		model.addAttribute("usuario", usuario);
-		
-		return "crudUsuarios";
 	}
 	
 	@PostMapping("/usuario/actualizar")

@@ -43,7 +43,7 @@
  		<div class="card mb-4" style="width: 30%; display: flex; justify-content: center;align-items: center; background-color:#251F22 ;">
     		
     		<img style="width: 75%; height: 100%; " th:src="@{/img/{id}.jpeg(id=${producto.cod_prod})}">
-    		<p th:text="${producto.desc_prod}"></p>	
+    		<label style="color: white;" th:text="${producto.desc_prod}"></label>	
     		
    		</div>
     		
@@ -60,21 +60,23 @@
 			    
 				<div class="form-group">
 				 	<label style="color: white;" for="inputNombre">Nombre de Producto</label>
-				 	<input type="text" th:field="*{desc_prod}" class="form-control" id="inputNombre" readonly="readonly">
+				 	<label style="color: white;" th:text="${producto.desc_prod}"></label>	
 				</div>
 				<div class="form-row">
 					<div class="form-group col-md-6">
 					    <label style="color: white;" for="inputPrecio">Precio</label>
-					    <input type="text" step="0.01" th:field="*{precio}" class="form-control" id=""inputPrecio"" readonly="readonly">
+					    <label style="color: white;" th:text="${producto.precio}"></label>	
 					</div>
 				  	<div class="form-group col-md-6">
 					    <label style="color: white;" for="inputCantidad">Cantidad</label>
-					    <input type="number"  class="form-control" id="inputCantidad" placeholder="1 ">
+					    <label style="color: white;" th:text="${producto.stock}"></label>
+					    
+					    <input type="number"  class="form-control" id="inputCantidad" placeholder="1 "min=1 th:max="${producto.stock}">
 					</div>
 			  	</div>
 			
 				<center>
-				  <button type="submit">Agregar al carrito</button>
+				  <button th:if="${producto.stock > 0}" type="submit">Agregar al carrito</button>
 				 <a style="margin-left: 30px ; text-decoration: none; color: white;" href="/producto/catalogo">Volver</a>
 				</center>
 			</form>	<!-- -->

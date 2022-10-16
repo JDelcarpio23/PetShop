@@ -51,6 +51,9 @@ public class ProductoController {
 	/*CATALOGO*/
 	@GetMapping("/producto/catalogo")
 	public String catalogo(@ModelAttribute Usuario usuario, Model model) {
+		
+		com.pet.util.Constantes.CODIGOPROD = 0;
+		
 		model.addAttribute("lstProductos", repop.findAll());
 		
 		usuario = repou.findById(com.pet.util.Constantes.CODIGO).get();
