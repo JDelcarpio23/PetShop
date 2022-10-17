@@ -26,10 +26,10 @@
 			<nav th:fragment="nav">
 				<a href="/inicio/retornar" style="text-decoration: none"><h2 class="logo">Pet Shop <span>Panchitos</span></h2> </a>
 				<ul >					
-					<li ><a href="/producto/catalogo" >Catalogo</a></li>
-					<li th:if="${usuario.cod_tipo == 1}"><a href="/usuario/listar" class="nav-link">Mant. Usuario</a></li>
-					<li th:if="${usuario.cod_tipo == 1}"><a href="/producto/listar" class="nav-link">Mant. Producto</a></li>
-					<li><a href="/inicio/sedes">Nuestras sedes</a></li>					
+					<li ><a href="/producto/catalogo" class="nav-link">Catalogo</a></li>
+					<li th:if="${usuario.cod_tipo == 1}"><a href="/usuario/listar" class="nav-link">Usuarios ADM</a></li>
+					<li th:if="${usuario.cod_tipo == 1}"><a href="/producto/listar" class="nav-link">Productos ADM</a></li>
+					<li><a href="/inicio/sedes" class="nav-link">Nuestras sedes</a></li>				
 				</ul>
 				<a href="/login/cargar" type="button" class="cta">Cerrar Sesion</a>
 			</nav>
@@ -41,18 +41,21 @@
 		
 		<div class="container" style="max-width:1200px;">
 			    <div th:each="p : ${lstProductos}">
-			    <div class="card">
-			    <figure>
+			    <div class="card" style="height: 100%">
+			    <figure style="height: auto">
 			    <img th:src="@{/img/{id}.jpeg(id=${p.cod_prod})}"  >
 			    </figure>
 			    <div class="contenido">
-			      <h1 class="descripcion" th:text="${p.desc_prod}"></h1>
-			      <h2 class="precio" th:text="${#numbers.formatCurrency(p.precio)}"></h2>
+			      <h1 class="descripcion" th:text="${p.desc_prod}" style="height: 50px;"></h1>
+			      <div  style="display: flex; text-align: center; justify-content: center;">
+			      <label >S/</label> 
+			      <h2 class="precio" th:text="${p.precio}"></h2>
+			      </div>
 				</div>
-				<div class="form-row">
-					<form action="/producto/detalles" method="post">
+				<div class="form-row" style="display: flex; align-items: center; justify-content: center;">
+					<form action="/producto/detalles" method="post" >
 			      			<input type="hidden" name="cod_prod" th:value="${p.cod_prod}">
-			      			<button type="submit" style="margin-left: 50%;">Ver detalles  </button>
+			      			<button type="submit" style="  ">Ver detalles  </button>
 			      		</form>
 			      		
 			      		<!--<form action="#" method="post">

@@ -54,7 +54,7 @@ body{
 .card .contenido{
 	padding: 15px;
 	text-align: center;
-	
+	height: 150px;
 }
 .card .contenido h2{
 	line-height: 1.5;

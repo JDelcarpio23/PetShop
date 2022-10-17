@@ -3,7 +3,7 @@
 
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<title>principal</title>
+	<title>Home Panchitos</title>
 	<link rel="preconnect" href="https://fonts.gstatic.com">
 	<link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100;0,30
 	0;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&family=Montserrat:wght@700;800;900&display=swap" rel="stylesheet">
@@ -14,14 +14,15 @@
 	<script src="https://kit.fontawesome.com/d3f2cbc780.js" crossorigin="anonymous"></script>
 </head>
 <body>
+<main>
 	<div class="hero" id="hero">
-			<nav >
+			<nav th:fragment="nav" >
 				<a href="/inicio/retornar" style="text-decoration: none"><h2 class="logo">Pet Shop <span>Panchitos</span></h2> </a>
 				<ul >					
-					<li ><a href="/producto/catalogo" >Catalogo</a></li>
-					<li th:if="${usuario.cod_tipo == 1}" ><a href="/usuario/listar" class="nav-link">Mant. Usuario</a></li>
-					<li th:if="${usuario.cod_tipo == 1}"><a href="/producto/listar" class="nav-link">Mant. Producto</a></li>
-					<li><a href="/inicio/sedes">Nuestras sedes</a></li>
+					<li ><a href="/producto/catalogo" class="nav-link">Catalogo</a></li>
+					<li th:if="${usuario.cod_tipo == 1}" ><a href="/usuario/listar" class="nav-link">Usuarios ADM</a></li>
+					<li th:if="${usuario.cod_tipo == 1}"><a href="/producto/listar" class="nav-link">Productos ADM</a></li>
+					<li><a href="/inicio/sedes" class="nav-link">Nuestras sedes</a></li>
 					
 				</ul>
 				<a href="/login/cargar" type="button" class="cta">Cerrar Sesion</a>
@@ -91,6 +92,7 @@
 			    </div>
  
     	 </div>
+</main>
 	<br>
 	<br>
 	<footer th:fragment="footer">

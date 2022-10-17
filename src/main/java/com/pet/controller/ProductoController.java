@@ -164,5 +164,17 @@ System.out.println(p);
 		return "detalleProducto";
 	}
 	
+	@PostMapping("/producto/carrito")
+	public String agregarCarrito(@ModelAttribute Usuario usuario,@ModelAttribute Producto p, Model model) {
+		com.pet.util.Constantes.CODIGOPROD = p.getCod_prod();
+		p = repop.findById(com.pet.util.Constantes.CODIGOPROD).get();
+		model.addAttribute("producto", p );
+		model.addAttribute("lstCategorias",repoc.findAll());
+		usuario = repou.findById(com.pet.util.Constantes.CODIGO).get();
+		model.addAttribute("usuario", usuario);
+		
+		System.out.println(p.getCod_prod() + " - " + p.getPrecio() + " - " + p.getDesc_prod() + " - " + p.getStock());
+		return "detalleProducto";
+	}
 	
 }

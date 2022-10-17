@@ -26,10 +26,10 @@
 			<nav th:fragment="nav">
 				<a href="/inicio/retornar" style="text-decoration: none"><h2 class="logo">Pet Shop <span>Panchitos</span></h2> </a>
 				<ul >					
-					<li ><a href="/producto/catalogo" >Catalogo</a></li>
-					<li th:if="${usuario.cod_tipo == 1}"><a href="/usuario/listar" class="nav-link">Mant. Usuario</a></li>
-					<li th:if="${usuario.cod_tipo == 1}"><a href="/producto/listar" class="nav-link">Mant. Producto</a></li>
-					<li><a href="/inicio/sedes">Nuestras sedes</a></li>					
+					<li ><a href="/producto/catalogo" class="nav-link">Catalogo</a></li>
+					<li th:if="${usuario.cod_tipo == 1}"><a href="/usuario/listar" class="nav-link">Usuarios ADM</a></li>
+					<li th:if="${usuario.cod_tipo == 1}"><a href="/producto/listar" class="nav-link">Productos ADM</a></li>
+					<li><a href="/inicio/sedes" class="nav-link">Nuestras sedes</a></li>					
 				</ul>
 				<a href="/login/cargar" type="button" class="cta">Cerrar Sesion</a>
 			</nav>
@@ -43,12 +43,12 @@
  		<div class="card mb-4" style="width: 30%; display: flex; justify-content: center;align-items: center; background-color:#251F22 ;">
     		
     		<img style="width: 75%; height: 100%; " th:src="@{/img/{id}.jpeg(id=${producto.cod_prod})}">
-    		<label style="color: white;" th:text="${producto.desc_prod}"></label>	
+    		
     		
    		</div>
     		
-	   	<section>
-	    	<form style="width: 60%; margin-top: 20%; margin-left: 10%; " action="#" method="post" th:object="${producto}"  enctype="multipart/form-data">
+	   	<section style="width: 20%;">
+	    	<form style=" margin-top: 20%; margin-left: 10%; " action="/producto/carrito" method="post" th:object="${producto}"  enctype="multipart/form-data">
 			   
 			  
 			    <div class="form-group">
@@ -59,17 +59,17 @@
 			    </div>
 			    
 				<div class="form-group">
-				 	<label style="color: white;" for="inputNombre">Nombre de Producto</label>
-				 	<label style="color: white;" th:text="${producto.desc_prod}"></label>	
+				 	
+				 	<H1 style="color: white;" th:text="${producto.desc_prod}"></H1>	
 				</div>
 				<div class="form-row">
-					<div class="form-group col-md-6">
-					    <label style="color: white;" for="inputPrecio">Precio</label>
-					    <label style="color: white;" th:text="${producto.precio}"></label>	
+					<div class="form-group col-md-8" style="display: flex;">
+					    <h4 style="color: white;" for="inputPrecio">S/</h4>
+					    <h4 style="color: white;" th:text="${producto.precio}"></h4>	
 					</div>
 				  	<div class="form-group col-md-6">
 					    <label style="color: white;" for="inputCantidad">Cantidad</label>
-					    <label style="color: white;" th:text="${producto.stock}"></label>
+					  
 					    
 					    <input type="number"  class="form-control" id="inputCantidad" placeholder="1 "min=1 th:max="${producto.stock}">
 					</div>
@@ -79,6 +79,7 @@
 				  <button th:if="${producto.stock > 0}" type="submit">Agregar al carrito</button>
 				 <a style="margin-left: 30px ; text-decoration: none; color: white;" href="/producto/catalogo">Volver</a>
 				</center>
+				
 			</form>	<!-- -->
 		</section> 
     </div>
