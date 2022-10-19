@@ -11,23 +11,32 @@
 	<link rel="stylesheet" href="css/bootstrap.css">
 	<link rel="stylesheet" href="css/bootstrap-theme.css">
 	<link rel="stylesheet" href="css/bootstrapValidator.css">
+	 <link rel="stylesheet" type="text/css" href="static/css/nav.css" th:href="@{/css/nav.css}"  />
 	<link rel="stylesheet" type="text/css" href="static/css/registrarse.css" th:href="@{/css/registrarse.css}"  />
 </head>
 <body>
-<div class="hero" id="hero"> 
-			<nav >
-				<h2 class="logo">Pet Shop <span>Panchitos</span></h2>
-				<a href="/inicio/retornar" type="button" class="cta">Volver</a>
-				</nav>	
-</div>
+ <div class="hero" id="hero">
+			<nav th:fragment="nav">
+				<a href="/inicio/retornar" style="text-decoration: none"><h2 class="logo">Pet Shop <span>Panchitos</span></h2> </a>
+				<ul >					
+					<li ><a href="/producto/catalogo" class="nav-link">Catalogo</a></li>
+					<li th:if="${usuario.cod_tipo == 1}"><a href="/usuario/listar" class="nav-link">Usuarios ADM</a></li>
+					<li th:if="${usuario.cod_tipo == 1}"><a href="/producto/listar" class="nav-link">Productos ADM</a></li>
+					<li><a href="/inicio/sedes" class="nav-link">Nuestras sedes</a></li>
+					<li ><a href="/perfil/cargar" class="nav-link">Perfil</a></li>				
+				</ul>
+				<a href="/login/cargar" type="button" class="cta">Cerrar Sesion</a>
+			</nav>
+		</div>
 <div class="formulario">
 		
     	<h1>Perfil de Usuario</h1>
     	<img src="static/img/perfil.jpg" class="img-fluid" alt="" th:src="@{/img/perfil.jpg}">
     	
-    	<form action="#" method="post" th:object="${usuario}">
+    	<form action="/usuario/editarPerfil" method="post" th:object="${usuario}">
 		    <div class="form-group">
 		      <input type="hidden" th:field="*{cod_usu}">
+		    
 		      <label for="inputNombre">Nombre</label>
 		      <input type="text" th:field="*{nom_usu}" class="form-control" id="inputEmail4" placeholder="Ingrese su Nombre">
 		    </div>
@@ -51,6 +60,10 @@
 			  <div class="form-group col-md-6">
 			    <label for="inputFecNac">DNI</label>
 			    <input type="text" th:field="*{dni_usu}" class="form-control" id="inputAddress2" placeholder="Ingrese su DNI">
+			  </div>
+			  <div class="form-group col-md-6">
+			   
+			    <input type="hidden" th:field="*{cod_tipo}" class="form-control" id="inputAddress2" placeholder="">
 			  </div>
 		  </div>
 		  
