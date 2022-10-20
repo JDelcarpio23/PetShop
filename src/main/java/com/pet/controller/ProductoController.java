@@ -11,7 +11,6 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -167,8 +166,10 @@ System.out.println(p);
 	
 	@PostMapping("/producto/carrito")
 	public String agregarCarrito(@ModelAttribute Usuario usuario,@ModelAttribute Producto p, Model model) {
-		com.pet.util.Constantes.CODIGOPROD = p.getCod_prod();
-		p = repop.findById(com.pet.util.Constantes.CODIGOPROD).get();
+		//com.pet.util.Constantes.CODIGOPROD = p.getCod_prod();
+		//p = repop.findById(com.pet.util.Constantes.CODIGOPROD).get();
+		p = repop.findById(p.getCod_prod()).get();
+		
 		model.addAttribute("producto", p );
 		model.addAttribute("lstCategorias",repoc.findAll());
 		usuario = repou.findById(com.pet.util.Constantes.CODIGO).get();
