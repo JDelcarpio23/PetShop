@@ -23,7 +23,7 @@
 					<li th:if="${usuario.cod_tipo == 1}" ><a href="/usuario/listar" class="nav-link">Usuarios ADM</a></li>
 					<li th:if="${usuario.cod_tipo == 1}"><a href="/producto/listar" class="nav-link">Productos ADM</a></li>
 					<li><a href="/inicio/sedes" class="nav-link">Nuestras sedes</a></li>
-					<li ><a href="/perfil/cargar" class="nav-link">Perfil</a></li>
+					<li th:if="${usuario.cod_tipo == 2}"><a href="/perfil/cargar" class="nav-link">Perfil</a></li>
 					
 				</ul>
 				<a href="/login/cargar" type="button" class="cta">Cerrar Sesion</a>
