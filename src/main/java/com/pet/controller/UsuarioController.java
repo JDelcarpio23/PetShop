@@ -238,23 +238,5 @@ System.out.println(u);
 		return "listadoUsuarios";
 	}
 	
-	@PostMapping("/usuario/editarPerfil")
-	public String actualizarPerfilUsuario(@ModelAttribute Usuario usuario, Model model ) {	
-		System.out.println("Enviado " + usuario);
-		
-		try {
-						
-			repoU.save(usuario);
-			model.addAttribute("mensaje", "Usuario Actualizado");
-			
-			
-		} catch (Exception e) {
-			
-			model.addAttribute("mensaje","Error al Actualizar");				
-			
-		}		
-		usuario = repoU.findById(com.pet.util.Constantes.CODIGO).get();
-		model.addAttribute("usuario", usuario);
-		return "perfil";
-	}
+	
 }

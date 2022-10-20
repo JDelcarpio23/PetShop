@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -50,7 +51,7 @@ public class ProductoController {
 	
 	/*CATALOGO*/
 	@GetMapping("/producto/catalogo")
-	public String catalogo(@ModelAttribute Usuario usuario, Model model) {
+	public String catalogo(@ModelAttribute Usuario usuario, @ModelAttribute Producto producto,Model model) {
 		
 		com.pet.util.Constantes.CODIGOPROD = 1;
 		
@@ -175,6 +176,34 @@ System.out.println(p);
 		
 		System.out.println(p.getCod_prod() + " - " + p.getPrecio() + " - " + p.getDesc_prod() + " - " + p.getStock());
 		return "detalleProducto";
+	}
+	
+	@GetMapping("/producto/buscar")
+	public String abrirbuscar(@ModelAttribute Producto producto, @ModelAttribute Usuario usuario, Model model) {
+		
+		System.out.println("enviar "+ producto.getCod_prod());
+		
+		try {
+			producto = repop.findById(producto.getCod_prod()).get();
+			
+			
+		} catch (Exception e) {
+			
+			model.addAttribute("mensaje","Producto No Encontrado");
+			usuario = repou.findById(com.pet.util.Constantes.CODIGO).get();
+			model.addAttribute("usuario", usuario);
+			model.addAttribute("lstProductos", repop.findAll());
+			return "catalogo";
+		}
+		
+		producto = repop.findById(producto.getCod_prod()).get();
+
+		model.addAttribute("producto", producto);
+		
+		usuario = repou.findById(com.pet.util.Constantes.CODIGO).get();
+		model.addAttribute("usuario", usuario);
+		return "detalleProducto";
+		
 	}
 	
 }

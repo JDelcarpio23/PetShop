@@ -81,3 +81,29 @@ body{
 	font-weight:999;
 	border-radius: 25px;
 }
+
+.buscar{
+	text-align: center;
+}
+
+.buscar input{
+	width: 150px;
+}
+.buscar img{
+	filter: brightness(1.1);
+	mix-blend-mode: multiply;
+	width: 35px;
+}
+
+p{
+	color: white;
+	font-weight: bold;
+}
+
+.buscar button{
+	text-decoration: none;
+	padding: 10px;
+	background-color:#ea1538;
+	border-radius: 25px;
+}
+
