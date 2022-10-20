@@ -160,11 +160,13 @@ public class UsuarioController {
 	public String editarCrud(@ModelAttribute Usuario usuario, Model model ) {	
 		System.out.println(usuario);
 		
-		model.addAttribute("usuario", repoU.findById(usuario.getCod_usu()));
+		usuario = repoU.findById(usuario.getCod_usu()).get();
+		
+		model.addAttribute("usuario", usuario);
 		model.addAttribute("lstTipos",repoT.findAll());
 
-		usuario = repoU.findById(com.pet.util.Constantes.CODIGO).get();
-		model.addAttribute("usuario", usuario);
+		//usuario = repoU.findById(com.pet.util.Constantes.CODIGO).get();
+		//model.addAttribute("usuario", usuario);
 		return "crudUsuarios";
 	}
 	
