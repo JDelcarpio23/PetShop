@@ -49,7 +49,8 @@
    		</div>
     		
 	   	<section style="width: 20%;">
-	    	<form style=" margin-top: 20%; margin-left: 10%; " action="/producto/carrito" method="post" th:object="${producto}"  enctype="multipart/form-data">
+	    	<form style=" margin-top: 20%; margin-left: 10%; "
+	    	 th:action="@{/producto/agregarcarrito}" method="post" th:object="${producto}"  enctype="multipart/form-data">
 			   
 			  
 			    <div class="form-group">
@@ -61,12 +62,14 @@
 			    
 				<div class="form-group">
 				 	
-				 	<H1 style="color: white;" th:text="${producto.desc_prod}"></H1>	
+				 	<H1 style="color: white;" th:text="${producto.desc_prod}"></H1>
+				 	<input type="hidden" th:field="*{desc_prod}" class="form-control" id="inputNombre" readonly="readonly">	
 				</div>
 				<div class="form-row">
 					<div class="form-group col-md-8" style="display: flex;">
 					    <h4 style="color: white;" for="inputPrecio">S/</h4>&nbsp;
 					    <h4 style="color: white;" th:text="${producto.precio}"></h4>	
+					    <input type="hidden" step="0.01" th:field="*{precio}" class="form-control" id=""inputPrecio"" readonly="readonly">
 					</div>
 					<div class="form-group col-md-8" style="display: flex;">
 					    <h4 style="color: white;" for="inputPrecio">Stock:</h4>
@@ -75,14 +78,12 @@
 					</div>
 				  	<div class="form-group col-md-6">
 					    <label style="color: white;" for="inputCantidad">Cantidad</label>
-					  
-					    
-					    <input type="number"  class="form-control" id="inputCantidad" placeholder="1" min=1 th:max="${producto.stock}">
+					    <input type="number" th:value="cantidad" class="form-control" id="inputCantidad" name="inputCantidad" placeholder="1 ">
 					</div>
 			  	</div>
 			
 				<center>
-				  <button th:if="${producto.stock > 0}" type="submit">Agregar al carrito</button>
+				  <button type="submit">Agregar al carrito</button>
 				 <a style="margin-left: 30px ; text-decoration: none; color: white;" href="/producto/catalogo">Volver</a>
 				</center>
 				
