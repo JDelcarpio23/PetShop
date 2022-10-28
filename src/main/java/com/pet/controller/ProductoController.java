@@ -49,6 +49,8 @@ public class ProductoController {
 	@Autowired
 	private IVentaRepository repovent;
 	
+	
+	
 	@GetMapping("/producto/listar")
 	public String listaProductos(@ModelAttribute Usuario usuario, Model model) {
 		model.addAttribute("lstProductos", repop.findAll());
@@ -206,7 +208,7 @@ System.out.println(p);
 			// Si obtenemos la venta de BD obtenemos sus detalles
 			if (lstVentaBD != null && lstVentaBD.size() > 0) {
 				ventaBD = lstVentaBD.get(0);
-				lstDetalleVentaBD = repodetvent.findByCodVen(ventaBD.getCodVen());
+				lstDetalleVentaBD = repodetvent.findByCodVen(ventaBD.getCod_Ven());
 			}
 			
 
@@ -249,7 +251,7 @@ System.out.println(p);
 		if(!existe) {
 			//Registramos nuevo item 
 			DetalleVenta objDetvent = new DetalleVenta();
-			objDetvent.setCodVen(objVenta.getCodVen());
+			objDetvent.setCodVen(objVenta.getCod_Ven());
 			objDetvent.setProducto(p);
 			objDetvent.setCantidad(inputCantidad);
 			objDetvent.setTotal((inputCantidad * p.getPrecio()));
@@ -292,7 +294,7 @@ System.out.println(p);
 		objDetvent.setCantidad(inputCantidad);
 		System.out.println("total:" + (inputCantidad * p.getPrecio()));
 		objDetvent.setTotal((inputCantidad * p.getPrecio()));
-		objDetvent.setCodVen(objVenta.getCodVen());
+		objDetvent.setCodVen(objVenta.getCod_Ven());
 		
 		List<DetalleVenta> lstDetalleVenta = new ArrayList<DetalleVenta>();
 		lstDetalleVenta.add(objDetvent);
@@ -317,7 +319,7 @@ System.out.println(p);
 		
 		//Venta objVenta = (Venta) model.getAttribute("objVenta");
 		if(objVenta != null) {
-			List<DetalleVenta> lstDetalleVenta = (List<DetalleVenta>) repodetvent.findByCodVen(objVenta.getCodVen());
+			List<DetalleVenta> lstDetalleVenta = (List<DetalleVenta>) repodetvent.findByCodVen(objVenta.getCod_Ven());
 			model.addAttribute("lstDetalleVenta", lstDetalleVenta);
 			calculoPrecioTotal(objVenta, lstDetalleVenta);
 			model.addAttribute("objVenta", objVenta);
@@ -366,12 +368,35 @@ System.out.println(p);
 		
 		//Venta objVenta = (Venta) model.getAttribute("objVenta");
 		if(objVenta != null) {
-			List<DetalleVenta> lstDetalleVenta = (List<DetalleVenta>) repodetvent.findByCodVen(objVenta.getCodVen());
+			List<DetalleVenta> lstDetalleVenta = (List<DetalleVenta>) repodetvent.findByCodVen(objVenta.getCod_Ven());
 			model.addAttribute("lstDetalleVenta", lstDetalleVenta);
 			calculoPrecioTotal(objVenta, lstDetalleVenta);
 			model.addAttribute("objVenta", objVenta);
+			//System.out.println(objVenta.getEstado());
 		}
 		return "carrito";
+	}
+	
+	
+	
+	
+	@PostMapping("/realizarventa")
+	public String Vender(@ModelAttribute Usuario usuario,@ModelAttribute Producto p, Model model, @ModelAttribute Venta v) {
+		model.addAttribute("venta", repodetvent.findByCodVen(v.getCod_Ven()));
+		
+		System.out.println("Seteado correctamente");
+		
+		Venta objVenta = repovent.findByEstado("P").get(0);
+		objVenta.setEstado("R");
+		repovent.save(objVenta);
+		System.out.println(objVenta.getEstado());
+		
+		
+		usuario = repou.findById(com.pet.util.Constantes.CODIGO).get();
+		model.addAttribute("usuario", usuario);
+		
+		model.addAttribute("lstProductos", repop.findAll());
+		return "catalogo";
 	}
 	
 }
