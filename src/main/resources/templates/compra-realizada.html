@@ -11,89 +11,63 @@
 	<link rel="stylesheet" href="css/bootstrapValidator.css"> 
     <link rel="stylesheet" type="text/css" href="static/css/nav.css" th:href="@{/css/nav.css}"  />
     <link rel="stylesheet" type="text/css" href="static/css/producto_listado.css" th:href="@{/css/producto_listado.css}"  />
+    
 <head> 
 
-    <title>Proyecto PET</title> 
+    <title>Detalle Producto</title> 
 	
     
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 
 <body>
-    
-    <main>
-   <div class="hero" id="hero">
+ <div class="hero" id="hero">
 			<nav th:fragment="nav">
 				<a href="/inicio/retornar" style="text-decoration: none"><h2 class="logo">Pet Shop <span>Panchitos</span></h2> </a>
+				 
 				<ul >					
-					<li ><a href="/producto/catalogo" class="nav-link">Catalogo</a></li>
-					<li th:if="${usuario.cod_tipo == 1}"><a href="/usuario/listar" class="nav-link">Usuarios ADM</a></li>
-					<li th:if="${usuario.cod_tipo == 1}"><a href="/producto/listar" class="nav-link">Productos ADM</a></li>
-					<li><a href="/inicio/sedes" class="nav-link">Nuestras sedes</a></li>
-					<li th:if="${usuario.cod_tipo == 2}"><a href="/perfil/cargar" class="nav-link">Perfil</a></li>	
-					<li th:if="${usuario.cod_tipo == 2}"> <a href="/listarCarrito" type="button" class="cta" style="background-color: white ; color: #251F22;;"> 
-						<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cart" viewBox="0 0 16 16">
-						  <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l1.313 7h8.17l1.313-7H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
-						</svg>
-						</a> 
-					</li>				
+					<form action="/producto/catalogo" th:object="${lstDetalleVenta}" method="GET">
+						<li ><a href="/producto/catalogo" >Catalogo</a></li>
+						<li th:if="${usuario.cod_tipo == 1}"><a href="/usuario/listar" class="nav-link">Mant. Usuario</a></li>
+						<li th:if="${usuario.cod_tipo == 1}"><a href="/producto/listar" class="nav-link">Mant. Producto</a></li>
+						<li><a href="/inicio/sedes">Nuestras sedes</a></li>
+						<li th:if="${usuario.cod_tipo == 2}"><a href="/perfil/cargar" class="nav-link">Perfil</a></li>	
+						<li th:if="${usuario.cod_tipo == 2}">
+						<a href="/listarCarrito" type="button" class="cta" style=" color: white;"> 
+							<svg  xmlns="http://www.w3.org/2000/svg" width="19" height="19" fill="currentColor" class="bi bi-cart" viewBox="0 0 16 16">
+								<path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l1.313 7h8.17l1.313-7H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
+							</svg>
+						</a>
+						</li>
+					</form>					
 				</ul>
-				<a href="/login/cargar" type="button" class="cta">Cerrar Sesion</a>
-			</nav>
-		</div>
-		<br>
-		<br>
-		<h1 style="color:white; text-align: center; text-shadow: 2px 2px 2px #ea1538;">CATALOGO DE PRODUCTOS</h1>
-		<br>
-		<div class="buscar">
-		
-			<form action="/producto/buscar" th:object="${producto}" >
-				<p>Buscar producto por Codigo:</p>
-				<input type="number" min=1 th:field="*{cod_prod}"/>
-				<button type="submit" class="cta"><img src="static/img/buscar.jpg" th:src="@{/img/buscar.jpg}"></button>
-				<div style="color: white;" th:text="${mensaje}"></div>
-			</form>
-		
-		</div>
-		<div class="container" style="max-width:1200px;">
-			    <div th:each="p : ${lstProductos}">
-			    <div class="card" style="height: 100%">
-			    <figure style="height: auto">
-			    <img th:src="@{/img/{id}.jpeg(id=${p.cod_prod})}"  >
-			    </figure>
-			    <div class="contenido">
-			      <h1 class="descripcion" th:text="${p.desc_prod}" style="height: 50px;"></h1>
-			      <div  style="display: flex; text-align: center; justify-content: center;">
-			      <label >S/</label> 
-			      <h2 class="precio" th:text="${p.precio}"></h2>
-			      </div>
-				</div>
-				<div class="form-row" style="display: flex; align-items: center; justify-content: center;">
-					<form action="/producto/detalles" method="post" >
-			      			<input type="hidden" name="cod_prod" th:value="${p.cod_prod}">
-			      			<button type="submit">Ver detalles  </button>
-			      		</form>
-			      		
-			      		<!--<form action="#" method="post">
-			      			<input type="hidden" name="cod_prod" th:value="${p.cod_prod}">
-			      			<button type="submit" class="btn" style="margin-left: 50%;"> Añadir al carrito</button>
-			      		</form>-->
+			
+					
+					<a href="/login/cargar" type="button" class="cta">Cerrar Sesion</a>
 				
-				</div>
-			    
-			      		
-			      </div>
-			     
-			    </div>
-    	
-    	 </div>
-  
-	</main>
-	
-    
-    <br>
-    <br>
-    <footer th:fragment="footer">
+			</nav>
+	</div>
+	<div style=" display: flex; justify-content: center;  ">
+        <div class="card mb-1" style=" text-align:center ;width: 30%; display: flex; justify-content: center;align-items: center; background-color:#251F22 ; color:white; margin-top: 50px; padding: 40px 40px 40px 40px">
+            <h1>USTED ACABA DE COMPRAR</h1>
+           	<h1> PRODUCTOS </h1>
+
+           
+            <h1>Con un importe de:</h1>
+            <div style="display:flex;">
+                <h1>S/.</h1>
+               
+            </div>
+
+          <br>
+
+
+        </div>
+
+    </div>
+<br>
+<br>
+	<footer th:fragment="footer">
 		<div class="container_footer">
 			<div class="box_footer">
 				<div class="logo">

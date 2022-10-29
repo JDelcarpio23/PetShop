@@ -201,6 +201,10 @@ System.out.println(p);
 
 		if (inputCantidad <= p.getStock()) {
 
+			//reducir stock
+			System.out.println(p.getStock()-inputCantidad);
+			p.setStock(p.getStock()-inputCantidad);
+			
 			// OBTENEMOS LAS VENTAS
 			List<Venta> lstVentaBD = repovent.findByEstado("P");
 			List<DetalleVenta> lstDetalleVentaBD = new ArrayList<DetalleVenta>();
@@ -221,7 +225,7 @@ System.out.println(p);
 			
 			return "carrito";
 		} else {
-
+			
 			return "detalleProducto";
 
 		}
@@ -307,18 +311,29 @@ System.out.println(p);
 	
 	@GetMapping("delete/cart/{id}")
 	public String deletecart(@PathVariable("id") final Integer idDetvent,
-			@ModelAttribute Usuario usuario, Model model){
+			@ModelAttribute Usuario usuario, Model model, @ModelAttribute Producto p, @ModelAttribute DetalleVenta dv){
 		
+		dv = repodetvent.findById(idDetvent).get();
+		p = repop.findById(dv.getProducto().getCod_prod()).get();
+		System.out.println(dv.getCantidad());
+		
+		p.setStock(p.getStock()+dv.getCantidad());
+		repop.save(p);
 		repodetvent.deleteById(idDetvent);
 		
 		usuario = repou.findById(com.pet.util.Constantes.CODIGO).get();
 		model.addAttribute("usuario", usuario);
+		
+		//devolver el stock a la normalidad
+		//p = repop.findById(com.pet.util.Constantes.CODIGOPROD).get();
 		
 		
 		Venta objVenta = repovent.findByEstado("P").get(0);
 		
 		//Venta objVenta = (Venta) model.getAttribute("objVenta");
 		if(objVenta != null) {
+			
+			
 			List<DetalleVenta> lstDetalleVenta = (List<DetalleVenta>) repodetvent.findByCodVen(objVenta.getCod_Ven());
 			model.addAttribute("lstDetalleVenta", lstDetalleVenta);
 			calculoPrecioTotal(objVenta, lstDetalleVenta);
@@ -388,7 +403,9 @@ System.out.println(p);
 		
 		Venta objVenta = repovent.findByEstado("P").get(0);
 		objVenta.setEstado("R");
+		
 		repovent.save(objVenta);
+		
 		System.out.println(objVenta.getEstado());
 		
 		
@@ -396,7 +413,7 @@ System.out.println(p);
 		model.addAttribute("usuario", usuario);
 		
 		model.addAttribute("lstProductos", repop.findAll());
-		return "catalogo";
+		return "compra-realizada";
 	}
 	
 }
