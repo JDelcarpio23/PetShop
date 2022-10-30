@@ -396,14 +396,14 @@ System.out.println(p);
 	
 	
 	@PostMapping("/realizarventa")
-	public String Vender(@ModelAttribute Usuario usuario,@ModelAttribute Producto p, Model model, @ModelAttribute Venta v) {
+	public String Vender(@ModelAttribute Usuario usuario,@ModelAttribute Producto p, Model model, @ModelAttribute Venta v, @RequestParam double precio_total) {
 		model.addAttribute("venta", repodetvent.findByCodVen(v.getCod_Ven()));
-		
+		System.out.println(precio_total);
 		System.out.println("Seteado correctamente");
 		
 		Venta objVenta = repovent.findByEstado("P").get(0);
 		objVenta.setEstado("R");
-		
+		objVenta.setPrec_total(precio_total);
 		repovent.save(objVenta);
 		
 		System.out.println(objVenta.getEstado());
