@@ -194,7 +194,7 @@ System.out.println(p);
 	
 	@PostMapping("/producto/agregarcarrito")
 	public String agregarCarrito(@ModelAttribute Usuario usuario, @ModelAttribute Producto p,
-			@RequestParam Integer inputCantidad, Model model) {
+			@RequestParam Integer inputCantidad, Model model, @ModelAttribute Venta venta) {
 
 		com.pet.util.Constantes.CODIGOPROD = p.getCod_prod();
 		p = repop.findById(com.pet.util.Constantes.CODIGOPROD).get();
@@ -212,6 +212,7 @@ System.out.println(p);
 			// Si obtenemos la venta de BD obtenemos sus detalles
 			if (lstVentaBD != null && lstVentaBD.size() > 0) {
 				ventaBD = lstVentaBD.get(0);
+				ventaBD.setPrec_total(ventaBD.getPrec_total()+(p.getPrecio()*inputCantidad));
 				lstDetalleVentaBD = repodetvent.findByCodVen(ventaBD.getCod_Ven());
 			}
 			
@@ -220,7 +221,7 @@ System.out.println(p);
 				procesoDesdeBD(ventaBD,lstDetalleVentaBD,inputCantidad,model,p);
 				
 			}else {
-				procesoPrimerRegistro(model, p, inputCantidad);
+				procesoPrimerRegistro(model, p, inputCantidad, usuario);
 			}
 			
 			return "carrito";
@@ -278,13 +279,16 @@ System.out.println(p);
 	}
 	
 
-	void procesoPrimerRegistro(Model model, Producto p, Integer inputCantidad) {
+	void procesoPrimerRegistro(Model model, Producto p, Integer inputCantidad, @ModelAttribute Usuario usuario) {
+		
+		usuario = repou.findById(com.pet.util.Constantes.CODIGO).get();
+		model.addAttribute("usuario", usuario);
 		
 		//Integer ventaId = (int) (repovent.count() + 1);
 		Venta objVenta = new Venta();
 		
 		objVenta.setPrec_total(p.getPrecio()* inputCantidad);
-		objVenta.setCod_usu("A001"); // usuario.getCod_usu());
+		objVenta.setCodusu(usuario.getCodusu()); // usuario.getCod_usu());
 		LocalDate localDate = LocalDate.now();
 		objVenta.setFecha_bol(localDate.toString());
 		//objVenta.setCodVen(ventaId);
@@ -374,22 +378,31 @@ System.out.println(p);
 	@GetMapping("/listarCarrito")
 	public String listarCarrito(@ModelAttribute Usuario usuario, Model model) {
 		
+		
 
 		usuario = repou.findById(com.pet.util.Constantes.CODIGO).get();
 		model.addAttribute("usuario", usuario);
 		
 		
-		Venta objVenta = repovent.findByEstado("P").get(0);
-		
-		//Venta objVenta = (Venta) model.getAttribute("objVenta");
-		if(objVenta != null) {
-			List<DetalleVenta> lstDetalleVenta = (List<DetalleVenta>) repodetvent.findByCodVen(objVenta.getCod_Ven());
-			model.addAttribute("lstDetalleVenta", lstDetalleVenta);
-			calculoPrecioTotal(objVenta, lstDetalleVenta);
-			model.addAttribute("objVenta", objVenta);
-			//System.out.println(objVenta.getEstado());
+		try {
+			Venta objVenta = repovent.findByEstado("P").get(0);
+			
+			//Venta objVenta = (Venta) model.getAttribute("objVenta");
+			if(objVenta != null) {
+				List<DetalleVenta> lstDetalleVenta = (List<DetalleVenta>) repodetvent.findByCodVen(objVenta.getCod_Ven());
+				model.addAttribute("lstDetalleVenta", lstDetalleVenta);
+				calculoPrecioTotal(objVenta, lstDetalleVenta);
+				model.addAttribute("objVenta", objVenta);
+				//System.out.println(objVenta.getEstado());
+			}
+			return "carrito";
+		} catch (Exception e) {
+			
+			model.addAttribute("mensaje", "No tiene ningun producto agregado en su carrito");
+			return "principal";
 		}
-		return "carrito";
+		
+		
 	}
 	
 	
@@ -400,6 +413,8 @@ System.out.println(p);
 		model.addAttribute("venta", repodetvent.findByCodVen(v.getCod_Ven()));
 		System.out.println(precio_total);
 		System.out.println("Seteado correctamente");
+		
+		model.addAttribute("total", precio_total);
 		
 		Venta objVenta = repovent.findByEstado("P").get(0);
 		objVenta.setEstado("R");

@@ -84,7 +84,7 @@
 					</div>
 				  	<div class="form-group col-md-6">
 					    <label style="color: white;" for="inputCantidad">Cantidad</label>
-					    <input type="number" value="1" class="form-control" id="inputCantidad" name="inputCantidad" placeholder="">
+					    <input type="number" value="1" class="form-control" id="inputCantidad" name="inputCantidad" min="1" th:max="${producto.stock}">
 					</div>
 			  	</div>
 			

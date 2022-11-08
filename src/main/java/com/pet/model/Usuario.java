@@ -1,5 +1,6 @@
 package com.pet.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
@@ -12,7 +13,8 @@ import lombok.Data;
 public class Usuario {
 	
 	@Id
-	private String cod_usu;
+	@Column(name="cod_usu")
+	private String codusu;
 	private int cod_tipo;
     private String nom_usu;
     private String apel_usu;

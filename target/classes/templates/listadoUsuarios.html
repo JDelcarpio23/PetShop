@@ -65,7 +65,7 @@
 			  </thead>
 			  <tbody>
 			    <tr th:each="u : ${lstUsuarios}">
-			      <th th:text="${u.cod_usu}"></th>
+			      <th th:text="${u.codusu}"></th>
 			      <td th:text="${u.nom_usu}"></td>
 			      <td th:text="${u.apel_usu}"></td>
 			      <td th:text="${u.usuario}"></td>
@@ -75,13 +75,13 @@
 			      <td th:text="${u.cod_tipo}"></td>
 			      <td>
 			      		<form action="/usuario/actualizar" method="post">
-			      			<input type="hidden" name="cod_usu" th:value="${u.cod_usu}">
+			      			<input type="hidden" name="codusu" th:value="${u.codusu}">
 			      			<button type="submit" class="btn btn-primary">Editar</button>
 			      		</form>
 			      </td>
 			      <td>
 			      		<form action="/Usuario/eliminar" method="post">
-			      			<input type="hidden" name="cod_usu" th:value="${u.cod_usu}">
+			      			<input type="hidden" name="codusu" th:value="${u.codusu}">
 			      			<button type="submit" class="btn btn-danger">Eliminar</button>
 			      		</form>
 			      </td>

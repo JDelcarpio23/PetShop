@@ -46,17 +46,14 @@ public class UsuarioController {
 		}
 		model.addAttribute("lstProductos", repop.findAll());			
 		
-		  com.pet.util.Constantes.CODIGO = u.getCod_usu();
+		  com.pet.util.Constantes.CODIGO = u.getCodusu();
 		  com.pet.util.Constantes.TIPO = u.getCod_tipo();
 		  System.out.println("prueba " + com.pet.util.Constantes.CODIGO + "Tipo" + com.pet.util.Constantes.TIPO );
 		 
 		
 		model.addAttribute("usuario", u);
 		
-		/*
-		 * sesion.setAttribute("usuario", u); System.out.println(u);
-		 * System.out.println(sesion.getAttribute("usuario"));
-		 */
+		model.addAttribute("mensaje", "");
 		
 		return "principal";
 	}
@@ -67,7 +64,7 @@ public class UsuarioController {
 	public String retornarInicio(@ModelAttribute Usuario usuario, Model model ) {	
 		model.addAttribute("lstProductos", repop.findAll());
 		usuario = repoU.findById(com.pet.util.Constantes.CODIGO).get();
-		usuario = repoU.findById(usuario.getCod_usu()).get();
+		usuario = repoU.findById(usuario.getCodusu()).get();
 		System.out.println(usuario);
 		model.addAttribute("usuario", usuario);
 		
@@ -112,7 +109,7 @@ public class UsuarioController {
 		System.out.println("Enviado " + usuario);
 		
 		try {
-			usuario.setCod_usu(usuario.getDni_usu());
+			usuario.setCodusu(usuario.getDni_usu());
 			usuario.setCod_tipo(2);
 			repoU.save(usuario);			
 			model.addAttribute("mensaje", "Usuario Registrado");
@@ -160,7 +157,7 @@ public class UsuarioController {
 	public String editarCrud(@ModelAttribute Usuario usuario, Model model ) {	
 		System.out.println(usuario);
 		
-		usuario = repoU.findById(usuario.getCod_usu()).get();
+		usuario = repoU.findById(usuario.getCodusu()).get();
 		
 		model.addAttribute("usuario", usuario);
 		model.addAttribute("lstTipos",repoT.findAll());
@@ -195,7 +192,7 @@ public class UsuarioController {
 		
 System.out.println(u);
 		
-		u = repoU.findById(u.getCod_usu()).get();
+		u = repoU.findById(u.getCodusu()).get();
 		repoU.delete(u);
 		model.addAttribute("mensaje","Usuario Eliminado");
 		//repoU.save(u);
@@ -222,7 +219,7 @@ System.out.println(u);
 	public String registrar(@ModelAttribute Usuario usuario, Model model ) {	
 		
 		try {
-			usuario.setCod_usu(usuario.getNom_usu().substring(0,2)+usuario.getApel_usu().substring(0, 2)+usuario.getDni_usu());
+			usuario.setCodusu(usuario.getNom_usu().substring(0,2)+usuario.getApel_usu().substring(0, 2)+usuario.getDni_usu());
 			repoU.save(usuario);			
 			model.addAttribute("mensaje", "Usuario Registrado");			
 			

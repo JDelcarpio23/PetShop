@@ -18,7 +18,8 @@ public class Venta {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer cod_ven;
 	
-    private String cod_usu;
+	@Column(name="cod_usu")
+    private String codusu;
 	private String cod_pago;
     private String fecha_bol;
     private double prec_total;
@@ -32,11 +33,11 @@ public class Venta {
 	public void setCod_Ven(Integer cod_ven) {
 		this.cod_ven = cod_ven;
 	}
-	public String getCod_usu() {
-		return cod_usu;
+	public String getCodusu() {
+		return codusu;
 	}
-	public void setCod_usu(String cod_usu) {
-		this.cod_usu = cod_usu;
+	public void setCodusu(String cod_usu) {
+		this.codusu = cod_usu;
 	}
 	public String getCod_pago() {
 		return cod_pago;
