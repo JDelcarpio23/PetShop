@@ -206,7 +206,12 @@ System.out.println(p);
 			p.setStock(p.getStock()-inputCantidad);
 			
 			// OBTENEMOS LAS VENTAS
-			List<Venta> lstVentaBD = repovent.findByEstado("P");
+			
+			//List<Venta> lstVentaBD = repovent.findByEstado("P");
+			
+			List<Venta> lstVentaBD = repovent.findByCodusuAndEstado(usuario.getCodusu(), "P");
+			//Venta objVenta = lista.get(0);
+			
 			List<DetalleVenta> lstDetalleVentaBD = new ArrayList<DetalleVenta>();
 			Venta ventaBD = null;
 			// Si obtenemos la venta de BD obtenemos sus detalles
@@ -383,13 +388,18 @@ System.out.println(p);
 		usuario = repou.findById(com.pet.util.Constantes.CODIGO).get();
 		model.addAttribute("usuario", usuario);
 		
+		System.out.println(usuario.getCodusu());
+		
 		
 		try {
-			Venta objVenta = repovent.findByEstado("P").get(0);
+			//Venta objVenta = repovent.findByEstado("P").get(0);
+			List<Venta> lista = repovent.findByCodusuAndEstado(usuario.getCodusu(), "P");
+			Venta objVenta = lista.get(0);
 			
 			//Venta objVenta = (Venta) model.getAttribute("objVenta");
 			if(objVenta != null) {
-				List<DetalleVenta> lstDetalleVenta = (List<DetalleVenta>) repodetvent.findByCodVen(objVenta.getCod_Ven());
+				//List<DetalleVenta> lstDetalleVenta = (List<DetalleVenta>) repodetvent.findByCodVen(objVenta.getCod_Ven());
+				List lstDetalleVenta = repodetvent.findByCodVen(objVenta.getCod_Ven());
 				model.addAttribute("lstDetalleVenta", lstDetalleVenta);
 				calculoPrecioTotal(objVenta, lstDetalleVenta);
 				model.addAttribute("objVenta", objVenta);

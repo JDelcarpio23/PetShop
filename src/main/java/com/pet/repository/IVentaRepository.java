@@ -12,6 +12,6 @@ public interface IVentaRepository extends JpaRepository<Venta, Integer> {
 
 	List<Venta> findByEstado(String estado);
 	
-	//List<Venta> findByCodusuAndEstado(String codusu, String estado);
+	List<Venta> findByCodusuAndEstado(String codusu, String estado);
 	
 }
