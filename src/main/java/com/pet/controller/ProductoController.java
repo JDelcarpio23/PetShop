@@ -300,7 +300,9 @@ System.out.println(p);
 		objVenta.setEstado("P");
 		objVenta.setCod_pago("1"); // Visa
 		repovent.save(objVenta);
-		objVenta = repovent.findByEstado("P").get(0);
+		
+		
+		objVenta = repovent.findByCodusuAndEstado(usuario.getCodusu(), "P").get(0);
 		
 		DetalleVenta objDetvent = new DetalleVenta();
 		objDetvent.setProducto(p);
