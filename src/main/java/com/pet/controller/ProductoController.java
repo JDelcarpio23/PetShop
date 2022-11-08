@@ -218,7 +218,7 @@ System.out.println(p);
 			if (lstVentaBD != null && lstVentaBD.size() > 0) {
 				ventaBD = lstVentaBD.get(0);
 				ventaBD.setPrec_total(ventaBD.getPrec_total()+(p.getPrecio()*inputCantidad));
-				lstDetalleVentaBD = repodetvent.findByCodVen(ventaBD.getCod_Ven());
+				lstDetalleVentaBD = repodetvent.findByCodVen(ventaBD.getCodVen());
 			}
 			
 
@@ -261,7 +261,7 @@ System.out.println(p);
 		if(!existe) {
 			//Registramos nuevo item 
 			DetalleVenta objDetvent = new DetalleVenta();
-			objDetvent.setCodVen(objVenta.getCod_Ven());
+			objDetvent.setCodVen(objVenta.getCodVen());
 			objDetvent.setProducto(p);
 			objDetvent.setCantidad(inputCantidad);
 			objDetvent.setTotal((inputCantidad * p.getPrecio()));
@@ -309,7 +309,7 @@ System.out.println(p);
 		objDetvent.setCantidad(inputCantidad);
 		System.out.println("total:" + (inputCantidad * p.getPrecio()));
 		objDetvent.setTotal((inputCantidad * p.getPrecio()));
-		objDetvent.setCodVen(objVenta.getCod_Ven());
+		objDetvent.setCodVen(objVenta.getCodVen());
 		
 		List<DetalleVenta> lstDetalleVenta = new ArrayList<DetalleVenta>();
 		lstDetalleVenta.add(objDetvent);
@@ -345,7 +345,7 @@ System.out.println(p);
 		if(objVenta != null) {
 			
 			
-			List<DetalleVenta> lstDetalleVenta = (List<DetalleVenta>) repodetvent.findByCodVen(objVenta.getCod_Ven());
+			List<DetalleVenta> lstDetalleVenta = (List<DetalleVenta>) repodetvent.findByCodVen(objVenta.getCodVen());
 			model.addAttribute("lstDetalleVenta", lstDetalleVenta);
 			calculoPrecioTotal(objVenta, lstDetalleVenta);
 			model.addAttribute("objVenta", objVenta);
@@ -401,7 +401,7 @@ System.out.println(p);
 			//Venta objVenta = (Venta) model.getAttribute("objVenta");
 			if(objVenta != null) {
 				//List<DetalleVenta> lstDetalleVenta = (List<DetalleVenta>) repodetvent.findByCodVen(objVenta.getCod_Ven());
-				List lstDetalleVenta = repodetvent.findByCodVen(objVenta.getCod_Ven());
+				List lstDetalleVenta = repodetvent.findByCodVen(objVenta.getCodVen());
 				model.addAttribute("lstDetalleVenta", lstDetalleVenta);
 				calculoPrecioTotal(objVenta, lstDetalleVenta);
 				model.addAttribute("objVenta", objVenta);
@@ -422,7 +422,7 @@ System.out.println(p);
 	
 	@PostMapping("/realizarventa")
 	public String Vender(@ModelAttribute Usuario usuario,@ModelAttribute Producto p, Model model, @ModelAttribute Venta v, @RequestParam double precio_total) {
-		model.addAttribute("venta", repodetvent.findByCodVen(v.getCod_Ven()));
+		model.addAttribute("venta", repodetvent.findByCodVen(v.getCodVen()));
 		System.out.println(precio_total);
 		System.out.println("Seteado correctamente");
 		

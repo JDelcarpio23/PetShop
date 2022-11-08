@@ -20,6 +20,7 @@ public class DetalleVenta {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer cod_detalle;
+	
 	@Column(name="cod_ven", nullable = false)
 	private Integer codVen;
 	

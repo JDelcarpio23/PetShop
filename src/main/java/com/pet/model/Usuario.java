@@ -21,6 +21,7 @@ public class Usuario {
     private String usuario;
     private String contrasenia;
     private String telefono;
-    private String dni_usu;
+    @Column(name="dni_usu")
+    private String dni;
     
 }

@@ -9,5 +9,7 @@ import com.pet.model.Usuario;
 public interface IUsuarioRepository extends JpaRepository<Usuario, String> {
 	
 	Usuario findByUsuarioAndContrasenia(String usuario, String contrasenia);
+	
+	Usuario findByDni(String dni);
 
 }

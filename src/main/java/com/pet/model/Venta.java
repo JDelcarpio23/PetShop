@@ -16,7 +16,7 @@ public class Venta {
 	@Id
 	@Column(name = "cod_ven", nullable = false)
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer cod_ven;
+	private Integer codven;
 	
 	@Column(name="cod_usu")
     private String codusu;
@@ -27,11 +27,11 @@ public class Venta {
     
     
 	
-	public Integer getCod_Ven() {
-		return cod_ven;
+	public Integer getCodVen() {
+		return codven;
 	}
-	public void setCod_Ven(Integer cod_ven) {
-		this.cod_ven = cod_ven;
+	public void setCodVen(Integer cod_ven) {
+		this.codven = cod_ven;
 	}
 	public String getCodusu() {
 		return codusu;
