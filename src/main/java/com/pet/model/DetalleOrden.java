@@ -1,5 +1,6 @@
 package com.pet.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
@@ -7,14 +8,15 @@ import javax.persistence.Table;
 import lombok.Data;
 
 @Data
-@Table(name="detalle_orden")
+@Table(name="detalle_venta")
 @Entity
 public class DetalleOrden {
+
 	@Id
-	private Integer id;
-	private String nombre;
-	private double cantidad;
-	private double precio;
-	private double total;
-	
+	private Integer cod_detalle;
+	@Column(name="cod_ven", nullable = false)
+	private Integer codven;
+	private int cod_prod;	
+    private Integer cantidad;
+    private double total;
 }

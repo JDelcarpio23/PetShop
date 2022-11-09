@@ -15,7 +15,7 @@ import lombok.Data;
 @Data
 @Table(name="detalle_venta")
 @Entity
-public class DetalleVenta {
+public class DetalleVenta{
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,7 +26,9 @@ public class DetalleVenta {
 	
 	@OneToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="cod_prod")
-	private Producto producto;    
+	private Producto producto;
+	//@Column(name = "cod_prod", insertable = false, updatable = false)
+	//private int cod_prod;
 
 	
     private Integer cantidad;

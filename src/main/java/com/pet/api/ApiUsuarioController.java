@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.pet.Services.ClienteService;
+import com.pet.model.DetalleOrden;
 import com.pet.model.DetalleVenta;
 import com.pet.model.Usuario;
 import com.pet.model.Venta;
@@ -34,12 +35,12 @@ public class ApiUsuarioController {
 		return new ResponseEntity<>(servC.obtenerVentas(dni),HttpStatus.OK);
 	}
 	
-	@GetMapping("/detalle/{codVen}")
-	public ResponseEntity<List<DetalleVenta>> Detalles(@PathVariable Integer codVen){
+	@GetMapping("/detalle/{codven}")
+	public ResponseEntity<List<DetalleOrden>> Detalles(@PathVariable int codven){
 		
-		System.out.println("el codigo de venta es " + codVen);
+		System.out.println("el codigo de venta es " + codven);
 		
-		return new ResponseEntity<>(servC.obtenerDetalles(codVen),HttpStatus.OK);
+		return new ResponseEntity<>(servC.obtenerDetalles(codven),HttpStatus.OK);
 	}
 	
 
