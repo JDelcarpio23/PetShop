@@ -237,5 +237,34 @@ System.out.println(u);
 		return "listadoUsuarios";
 	}
 	
+	//Registro de Admin
+	
+	@GetMapping("/registro/admin/cargar")
+	public String abrirRegistroAdmin( Model model) {
+		model.addAttribute("usuario", new Usuario());
+		
+		return "registroAdmin";
+	}
+	
+	@PostMapping("/registro/admin/grabar")
+	public String grabarRegistroAdmin(@ModelAttribute Usuario usuario, Model model ) {	
+		System.out.println("Enviado " + usuario);
+		
+		try {
+			usuario.setCodusu(usuario.getDni());
+			usuario.setCod_tipo(1);
+			repoU.save(usuario);			
+			model.addAttribute("mensaje", "Admin Registrado");
+			
+			
+		} catch (Exception e) {
+			
+			model.addAttribute("mensaje","Error al Registrar");				
+			
+		}		
+		
+		return "login";
+	}
+	
 	
 }
