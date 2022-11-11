@@ -224,6 +224,7 @@ System.out.println(p);
 
 			if (lstDetalleVentaBD != null && lstDetalleVentaBD.size() > 0) {
 				procesoDesdeBD(ventaBD,lstDetalleVentaBD,inputCantidad,model,p);
+				model.addAttribute("lstDetalleVentaBD", repodetvent.findByCodVen(ventaBD.getCodVen()));
 				
 			}else {
 				procesoPrimerRegistro(model, p, inputCantidad, usuario);
