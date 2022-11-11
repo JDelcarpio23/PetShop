@@ -198,44 +198,55 @@ System.out.println(p);
 
 		com.pet.util.Constantes.CODIGOPROD = p.getCod_prod();
 		p = repop.findById(com.pet.util.Constantes.CODIGOPROD).get();
+		usuario = repou.findById(com.pet.util.Constantes.CODIGO).get();
+		model.addAttribute("usuario", usuario);
+		List<Venta> lstVentaBD = repovent.findByCodusuAndEstado(usuario.getCodusu(), "P");
+		List<DetalleVenta> lstDetalleVentaBD = new ArrayList<DetalleVenta>();
+		Venta ventaBD = null;
+		
+		try {
+			if (inputCantidad <= p.getStock()) {
 
-		if (inputCantidad <= p.getStock()) {
-
-			//reducir stock
-			System.out.println(p.getStock()-inputCantidad);
-			p.setStock(p.getStock()-inputCantidad);
-			
-			// OBTENEMOS LAS VENTAS
-			
-			//List<Venta> lstVentaBD = repovent.findByEstado("P");
-			
-			List<Venta> lstVentaBD = repovent.findByCodusuAndEstado(usuario.getCodusu(), "P");
-			//Venta objVenta = lista.get(0);
-			
-			List<DetalleVenta> lstDetalleVentaBD = new ArrayList<DetalleVenta>();
-			Venta ventaBD = null;
-			// Si obtenemos la venta de BD obtenemos sus detalles
-			if (lstVentaBD != null && lstVentaBD.size() > 0) {
-				ventaBD = lstVentaBD.get(0);
-				ventaBD.setPrec_total(ventaBD.getPrec_total()+(p.getPrecio()*inputCantidad));
-				lstDetalleVentaBD = repodetvent.findByCodVen(ventaBD.getCodVen());
-			}
-			
-
-			if (lstDetalleVentaBD != null && lstDetalleVentaBD.size() > 0) {
-				procesoDesdeBD(ventaBD,lstDetalleVentaBD,inputCantidad,model,p);
-				model.addAttribute("lstDetalleVentaBD", repodetvent.findByCodVen(ventaBD.getCodVen()));
+				//reducir stock
+				System.out.println(p.getStock()-inputCantidad);
+				p.setStock(p.getStock()-inputCantidad);
 				
-			}else {
-				procesoPrimerRegistro(model, p, inputCantidad, usuario);
-			}
-			
-			return "carrito";
-		} else {
-			
-			return "detalleProducto";
+				// OBTENEMOS LAS VENTAS
+				
+				//List<Venta> lstVentaBD = repovent.findByEstado("P");
+				
+				
+				
+				//Venta objVenta = lista.get(0);
+				
+				
+				// Si obtenemos la venta de BD obtenemos sus detalles
+				if (lstVentaBD != null && lstVentaBD.size() > 0) {
+					ventaBD = lstVentaBD.get(0);
+					ventaBD.setPrec_total(ventaBD.getPrec_total()+(p.getPrecio()*inputCantidad));
+					lstDetalleVentaBD = repodetvent.findByCodVen(ventaBD.getCodVen());
+				}
+				
 
+				if (lstDetalleVentaBD != null && lstDetalleVentaBD.size() > 0) {
+					procesoDesdeBD(ventaBD,lstDetalleVentaBD,inputCantidad,model,p);
+					model.addAttribute("lstDetalleVentaBD", repodetvent.findByCodVen(ventaBD.getCodVen()));
+					
+				}else {
+					procesoPrimerRegistro(model, p, inputCantidad, usuario);
+				}
+				
+				return "carrito";
+			}
+			else {
+				return "detalleProducto";
+			}
+		} catch (Exception exception) {
+			return "detalleProducto";
+			
 		}
+
+	
 
 	}
 	
@@ -249,8 +260,8 @@ System.out.println(p);
 			//Si el producto existe en la lista
 			if (objDetalleVenta.getProducto().getCod_prod() == p.getCod_prod()) {
 				existe = true;
-				objDetalleVenta.setCantidad(inputCantidad);
-				objDetalleVenta.setTotal(inputCantidad * p.getPrecio());
+				objDetalleVenta.setCantidad(objDetalleVenta.getCantidad() + inputCantidad);
+				objDetalleVenta.setTotal(objDetalleVenta.getTotal() + (inputCantidad * p.getPrecio()));
 				objDetVent = objDetalleVenta;
 				//Actualizamos
 				repodetvent.save(objDetalleVenta);
@@ -426,21 +437,19 @@ System.out.println(p);
 		model.addAttribute("venta", repodetvent.findByCodVen(v.getCodVen()));
 		System.out.println(precio_total);
 		System.out.println("Seteado correctamente");
-		
-		model.addAttribute("total", precio_total);
-		
-		Venta objVenta = repovent.findByEstado("P").get(0);
-		objVenta.setEstado("R");
-		objVenta.setPrec_total(precio_total);
-		repovent.save(objVenta);
-		
-		System.out.println(objVenta.getEstado());
-		
-		
 		usuario = repou.findById(com.pet.util.Constantes.CODIGO).get();
 		model.addAttribute("usuario", usuario);
-		
-		model.addAttribute("lstProductos", repop.findAll());
+		model.addAttribute("total", precio_total);
+		try {
+			Venta objVenta = repovent.findByCodusuAndEstado(usuario.getCodusu(), "P").get(0);
+			objVenta.setEstado("R");
+			objVenta.setPrec_total(precio_total);
+			repovent.save(objVenta);
+			System.out.println(objVenta.getEstado());
+			model.addAttribute("lstProductos", repop.findAll());
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
 		return "compra-realizada";
 	}
 	
