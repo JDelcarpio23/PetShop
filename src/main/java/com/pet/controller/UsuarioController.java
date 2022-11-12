@@ -23,6 +23,15 @@ public class UsuarioController {
 	@Autowired
 	private ITipoRepository repoT;
 	
+	@GetMapping("/")
+	public String Inicio(@ModelAttribute Usuario usuario, Model model ) {	
+		
+		model.addAttribute("lstProductos", repop.findAll());
+		model.addAttribute("usuario", usuario);
+		
+		return "index";
+	}
+	
 	@GetMapping("/login/cargar")
 	public String abrirLogin( Model model) {
 		model.addAttribute("usuario", new Usuario());
