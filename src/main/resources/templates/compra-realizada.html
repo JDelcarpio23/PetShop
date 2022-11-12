@@ -30,6 +30,7 @@
 						<li ><a href="/producto/catalogo" >Catalogo</a></li>
 						<li th:if="${usuario.cod_tipo == 1}"><a href="/usuario/listar" class="nav-link">Mant. Usuario</a></li>
 						<li th:if="${usuario.cod_tipo == 1}"><a href="/producto/listar" class="nav-link">Mant. Producto</a></li>
+						<li th:if="${usuario.cod_tipo == 1}"><a href="/util/listar" class="nav-link">Util ADM</a></li>
 						<li><a href="/inicio/sedes">Nuestras sedes</a></li>
 						<li th:if="${usuario.cod_tipo == 2}"><a href="/perfil/cargar" class="nav-link">Perfil</a></li>	
 						<li th:if="${usuario.cod_tipo == 2}">

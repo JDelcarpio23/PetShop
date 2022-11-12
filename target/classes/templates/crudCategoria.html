@@ -1,0 +1,74 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css">
+<head> 
+    <title>Mantenimiento Usuarios</title> 
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <script src="https://kit.fontawesome.com/d3f2cbc780.js" crossorigin="anonymous"></script>
+<link rel="preconnect" href="https://fonts.gstatic.com">
+	<link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100;0,30
+	0;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&family=Montserrat:wght@700;800;900&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="css/bootstrap.css">
+	<link rel="stylesheet" href="css/bootstrap-theme.css">
+	<link rel="stylesheet" href="css/bootstrapValidator.css">
+	<link rel="stylesheet" type="text/css" href="static/css/nav.css" th:href="@{/css/nav.css}"  />
+	<link rel="stylesheet" type="text/css" href="static/css/footer.css" th:href="@{/css/footer.css}"/> 
+	<link rel="stylesheet" type="text/css" href="static/css/curd_usuario.css" th:href="@{/css/crud_usuario.css}"/> 
+</head>
+<style>
+
+	body {
+	background-color:#251F22; 
+}
+</style>
+<body>
+    
+		<div class="hero" id="hero">
+			<nav th:fragment="nav">
+				<a href="/inicio/retornar" style="text-decoration: none"><h2 class="logo">Pet Shop <span>Panchitos</span></h2> </a>
+				<ul >					
+					<li ><a href="/producto/catalogo" class="nav-link">Catalogo</a></li>
+					<li ><a href="/usuario/listar" class="nav-link">Usuarios ADM</a></li>
+					<li ><a href="/producto/listar" class="nav-link">Productos ADM</a></li>
+					<li><a href="/inicio/sedes" class="nav-link">Nuestras sedes</a></li>
+					<li th:if="${usuario.cod_tipo == 2}"><a href="/perfil/cargar" class="nav-link">Perfil</a></li>
+				</ul>
+				<a href="/login/cargar" type="button" class="cta">Cerrar Sesion</a>
+			</nav>
+		</div>
+		
+		<br>
+		<h1 style="text-shadow: 2px 2px 2px #ea1538;">Mantenimiento de Tipos</h1>
+		<br>
+		<div class="formulario">
+		<section >
+			
+	    	<form action="/util/grabartipo" method="post" th:object="${tipo}" enctype="multipart/form-data" >
+							<div class="form-group">
+								<input type="hidden" th:field="*{cod_tipo}" class="form-control">
+
+							</div>
+							<div class="form-group">
+								<label for="inputDesc">Descripcion</label>
+								<input type="text" th:field="*{desc_tipo}" class="form-control" id="inputDesc"
+									placeholder="Ingrese el Nombre">
+							</div>
+							<button type="submit" class="btn btn-primary">Registrar</button>
+							
+						</form> <!-- -->
+			<br>
+			<div th:text="${mensaje}"></div>
+		</section>
+
+ </div>
+ <br>
+		<br>
+		<br>
+		
+	<footer th:replace="principal :: footer">
+	</footer>
+    		 
+   
+</body>
+
+</html>
