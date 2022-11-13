@@ -133,7 +133,8 @@
 
 						<form action="/util/grabartipo" method="post" th:object="${tipo}" enctype="multipart/form-data" >
 							<div class="form-group">
-								<input type="hidden" th:field="*{cod_tipo}" class="form-control">
+								<label for="inputDesc">Codigo de Tipo</label>
+								<input type="number" th:field="*{cod_tipo}" class="form-control">
 
 							</div>
 							<div class="form-group">
@@ -160,7 +161,8 @@
 
 						<form action="/util/grabarCate" method="post" th:object="${categoria}" enctype="multipart/form-data">
 							<div class="form-group">
-								<input type="hidden" th:field="*{cod_cate}" class="form-control" id="inputEmail4">
+								<label for="inputDesc">Cod de Categoria</label>
+								<input type="number" th:field="*{cod_cate}" class="form-control" id="inputEmail4">
 
 							</div>
 							<div class="form-group">
