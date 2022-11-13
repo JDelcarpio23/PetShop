@@ -16,7 +16,7 @@ public class Tipo implements Serializable{
 	private static final long serialVersionUID = 1l;
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	//@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int cod_tipo;
 	
     private String desc_tipo;
