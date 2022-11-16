@@ -9,9 +9,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.view.RedirectView;
 
 import com.pet.model.Categoria;
+import com.pet.model.Estado;
 import com.pet.model.Tipo;
 import com.pet.model.Usuario;
 import com.pet.repository.ICategoriaRepository;
+import com.pet.repository.IEstadoRepository;
 import com.pet.repository.ITipoRepository;
 import com.pet.repository.IUsuarioRepository;
 
@@ -27,14 +29,18 @@ public class UtilController {
 	@Autowired
 	private ICategoriaRepository repoC;
 	
+	@Autowired
+	private IEstadoRepository repoE;
+	
 	/*TIPOS  DE USUARIO*/
 	/*LISTAR TIPOS Y CATEGORIAS*/
 	@RequestMapping("/util/listar")
-	public String listaProductos(@ModelAttribute Usuario usuario, Model model, @ModelAttribute Tipo tipo, @ModelAttribute Categoria categoria) {
+	public String listaProductos(@ModelAttribute Usuario usuario, Model model, @ModelAttribute Tipo tipo, @ModelAttribute Categoria categoria, @ModelAttribute Estado estado) {
 		usuario = repoU.findById(com.pet.util.Constantes.CODIGO).get();
 		model.addAttribute("usuario", usuario);
 		model.addAttribute("lstCategorias", repoC.findAll());
 		model.addAttribute("lstTipos", repoT.findAll());
+		model.addAttribute("lstEstados", repoE.findAll());
 		return "consulta-utils";
 	}
 		
@@ -126,6 +132,54 @@ public class UtilController {
 		}
 		model.addAttribute("lstCategorias", repoC.findAll());
 		model.addAttribute("lstTipos", repoT.findAll());	
+		return new RedirectView("listar");
+	}
+	
+	/*ESTADO*/
+	@PostMapping("/util/grabarEstado")
+	public RedirectView grabarEstado(@ModelAttribute Usuario usuario,@ModelAttribute Tipo tipo,@ModelAttribute Categoria categoria, Model model, @ModelAttribute Estado estado) {
+		usuario = repoU.findById(com.pet.util.Constantes.CODIGO).get();
+		model.addAttribute("usuario", usuario);	
+		try {
+			Estado e = repoE.findById(estado.getCod_est()).get();
+			repoE.save(estado);
+			model.addAttribute("mensaje","Estado actualizado");		
+		} catch (Exception e) {
+			repoE.save(estado);
+			model.addAttribute("mensaje","Estado agregado");	
+		}
+		repoE.save(estado);
+		model.addAttribute("lstCategorias", repoC.findAll());
+		model.addAttribute("lstTipos", repoT.findAll());
+		model.addAttribute("lstEstados", repoE.findAll());
+		return new RedirectView("listar");
+	}
+	
+	@PostMapping("/util/editarEstado")
+    public String editarPag(@ModelAttribute Usuario usuario, Model model, @ModelAttribute Tipo tipo, @ModelAttribute Categoria categoria, @ModelAttribute Estado estado) {
+		usuario = repoU.findById(com.pet.util.Constantes.CODIGO).get();
+		model.addAttribute("usuario", usuario);		
+		model.addAttribute("estado", repoE.findById(estado.getCod_est()));		 
+		model.addAttribute("lstCategorias", repoC.findAll());
+		model.addAttribute("lstTipos", repoT.findAll());
+		model.addAttribute("lstEstados", repoE.findAll());
+        return "consulta-utils";
+    }
+	
+	@PostMapping("/util/eliminarEstado")
+	public RedirectView eliminarEstado(@ModelAttribute Usuario usuario,@ModelAttribute Tipo tipo ,Model model, @ModelAttribute Categoria categoria, @ModelAttribute Estado estado) {
+		usuario = repoU.findById(com.pet.util.Constantes.CODIGO).get();
+		model.addAttribute("usuario", usuario);		
+		try {
+			Estado e = repoE.findById(estado.getCod_est()).get();
+			repoE.delete(estado);
+			model.addAttribute("mensaje","Estado eliminado");
+		} catch (Exception e) {		
+			model.addAttribute("mensaje","Error al eliminar");	
+		}
+		model.addAttribute("lstCategorias", repoC.findAll());
+		model.addAttribute("lstTipos", repoT.findAll());
+		model.addAttribute("lstEstados", repoE.findAll());
 		return new RedirectView("listar");
 	}
 }
