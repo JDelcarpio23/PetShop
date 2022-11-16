@@ -46,7 +46,7 @@
     	<form action="/producto/grabar" method="post" th:object="${producto}"  enctype="multipart/form-data">
 		    <div class="form-group">
 		      <label for="inputId"></label>
-		      <input type="number" th:field="*{cod_prod}" class="form-control" id="inputId" >
+		      <input type="hidden" th:field="*{cod_prod}" class="form-control" id="inputId" >
 		    </div>
 		    
 		  <div class="form-group">
