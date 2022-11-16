@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.pet.Services.ClienteService;
 import com.pet.model.DetalleOrden;
-import com.pet.model.DetalleVenta;
 import com.pet.model.Usuario;
 import com.pet.model.Venta;
 

@@ -6,11 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.pet.model.DetalleOrden;
-import com.pet.model.DetalleVenta;
 import com.pet.model.Usuario;
 import com.pet.model.Venta;
 import com.pet.repository.IDetalleOrdenRepository;
-import com.pet.repository.IDetalleVentaRepository;
 import com.pet.repository.IUsuarioRepository;
 import com.pet.repository.IVentaRepository;
 
@@ -23,8 +21,6 @@ public class ClienteService {
 	@Autowired
 	private IVentaRepository repoV;
 	
-	@Autowired
-	private IDetalleVentaRepository repoD;
 	
 	@Autowired
 	private IDetalleOrdenRepository repoO;

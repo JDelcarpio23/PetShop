@@ -20,7 +20,7 @@
 			background-color: #251F22;
 		}
 	</style>
-	<title>Proyecto PET</title>
+	<title>Adm Util</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 
@@ -44,10 +44,10 @@
 			</div>
 			<br>
 			<br>
-			<div style="display: flex; width: 70%; text-align: center;padding: 50px 50px 50px 50px; margin: auto; ">
+			<div style="display: flex; width: 100%; text-align: center;padding: 50px 50px 50px 50px; margin: auto; ">
 
 
-				<div style="color: white; width: 100%; margin-right: 100px;">
+				<div style="color: white; width: 100%; margin-right: 20px;">
 					<h1 style="text-shadow: 2px 2px 2px #ea1538;">Listado de Tipos</h1>
 				
 				
@@ -84,7 +84,7 @@
 				</div>
 
 
-				<div style="color: white; width: 100%;">
+				<div style="color: white; width: 100%; margin-right: 20px;">
 					<h1 style="text-shadow: 2px 2px 2px #ea1538;">Listado de Categorias</h1>
 				
 					<br>
@@ -119,11 +119,47 @@
 						</tbody>
 					</table>
 				</div>
+				
+				<div style="color: white; width: 100%; margin-right: 100px;">
+					<h1 style="text-shadow: 2px 2px 2px #ea1538;">Listado de Estados</h1>
+				
+				
+					<br>
+					<table class="table">
+						<thead>
+							<tr>
+								<th style="color: #ea1538;">Código de Estado</th>
+								<th style="color: #ea1538;">Descripcion de Estado</th>
+								<th style="color: #ea1538;">Acciones</th>
+
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:each="t : ${lstEstados}">
+								<td th:text="${t.cod_est}"></td>
+								<td th:text="${t.desc_est}"></td>
+								<td style="display: flex;">
+
+									<form action="/util/editarEstado" method="post" style="margin-right: 10px;">
+										<input type="hidden" name="cod_est" th:value="${t.cod_est}">
+										<button type="submit" class="btn btn-primary">Editar</button>
+									</form>
+
+									<form action="/util/eliminarEstado" method="post">
+										<input type="hidden" name="cod_est" th:value="${t.cod_est}">
+										<button type="submit" class="btn btn-danger">Eliminar</button>
+									</form>
+								</td>
+
+							</tr>
+						</tbody>
+					</table>
+				</div>
 
 			</div>
 
-			<div style="display: flex; align-items: center; width: 70%; text-align: center;padding-bottom:50px ;margin: auto; ">
-			<div style="color: white; width: 100%; margin-right: 100px;">
+			<div style="display: flex; align-items: center; width: 90%; text-align: center; padding-bottom:50px ;margin: auto; ">
+			<div style="color: white; width: 100%; margin-right: 20px;">
 			
 				<br>
 				<h1 style="text-shadow: 2px 2px 2px #ea1538;">Mantenimiento de Tipos</h1>
@@ -133,7 +169,8 @@
 
 						<form action="/util/grabartipo" method="post" th:object="${tipo}" enctype="multipart/form-data" >
 							<div class="form-group">
-								<input type="hidden" th:field="*{cod_tipo}" class="form-control">
+								<label for="inputDesc">Codigo de Tipo</label>
+								<input type="number" th:field="*{cod_tipo}" class="form-control">
 
 							</div>
 							<div class="form-group">
@@ -150,7 +187,7 @@
 
 				</div>
 			</div>
-			<div style="color: white; width: 100%;">
+			<div style="color: white; width: 100%; margin-right: 20px;">
 			
 				<br>
 				<h1 style="text-shadow: 2px 2px 2px #ea1538;">Mantenimiento de Categoria</h1>
@@ -160,7 +197,8 @@
 
 						<form action="/util/grabarCate" method="post" th:object="${categoria}" enctype="multipart/form-data">
 							<div class="form-group">
-								<input type="hidden" th:field="*{cod_cate}" class="form-control" id="inputEmail4">
+								<label for="inputDesc">Cod de Categoria</label>
+								<input type="number" th:field="*{cod_cate}" class="form-control" id="inputEmail4">
 
 							</div>
 							<div class="form-group">
@@ -177,6 +215,35 @@
 
 				</div>
 			</div>
+			<div style="color: white; width: 100%;">
+			
+				<br>
+				<h1 style="text-shadow: 2px 2px 2px #ea1538;">Mantenimiento de Estado</h1>
+				<br>
+				<div class="formulario">
+					<section>
+
+						<form action="/util/grabarEstado" method="post" th:object="${estado}" enctype="multipart/form-data" >
+							<div class="form-group">
+								<label for="inputDesc">Codigo de Estado</label>
+								<input type="number" th:field="*{cod_est}" class="form-control">
+
+							</div>
+							<div class="form-group">
+								<label for="inputDesc">Descripcion</label>
+								<input type="text" th:field="*{desc_est}" class="form-control" id="inputDesc"
+									placeholder="Ingrese el Nombre">
+							</div>
+							<button type="submit" class="btn btn-primary">Registrar</button>
+							
+						</form> <!-- -->
+						<br>
+						<div th:text="${mensaje}"></div>
+					</section>
+
+				</div>
+			</div>
+			
 			</div>
 		</main>
 		<br>

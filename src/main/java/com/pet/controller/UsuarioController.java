@@ -23,6 +23,15 @@ public class UsuarioController {
 	@Autowired
 	private ITipoRepository repoT;
 	
+	@GetMapping("/")
+	public String Inicio(@ModelAttribute Usuario usuario, Model model ) {	
+		
+		//model.addAttribute("lstProductos", repop.findAll());
+		model.addAttribute("usuario", usuario);
+		
+		return "index";
+	}
+	
 	@GetMapping("/login/cargar")
 	public String abrirLogin( Model model) {
 		model.addAttribute("usuario", new Usuario());
@@ -210,8 +219,8 @@ System.out.println(u);
 	public String Registro(@ModelAttribute Usuario u, Model model) {
 		model.addAttribute("usuario", new Usuario());
 		model.addAttribute("lstTipos",repoT.findAll());
-		u = repoU.findById(com.pet.util.Constantes.CODIGO).get();
-		model.addAttribute("usuario", u);
+		//u = repoU.findById(com.pet.util.Constantes.CODIGO).get();
+		//model.addAttribute("usuario", u);
 		return "registrolog";
 	}
 	
@@ -219,7 +228,7 @@ System.out.println(u);
 	public String registrar(@ModelAttribute Usuario usuario, Model model ) {	
 		
 		try {
-			usuario.setCodusu(usuario.getNom_usu().substring(0,2)+usuario.getApel_usu().substring(0, 2)+usuario.getDni());
+			usuario.setCodusu(usuario.getDni());
 			repoU.save(usuario);			
 			model.addAttribute("mensaje", "Usuario Registrado");			
 			
