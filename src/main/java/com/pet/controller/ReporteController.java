@@ -41,5 +41,25 @@ public class ReporteController {
 		JasperExportManager.exportReportToPdfStream(jasperPrint, outputStream);
 
 	}
+		
+		@RequestMapping("/reportes/usuario/{reportName}")
+		public void reporteUsuario(@PathVariable("reportName") final String reportName,
+				@RequestParam(value = "codusu") final String codUsu,
+				@RequestParam(required = false) Map<String, Object> parameters, HttpServletResponse response,
+				HttpServletRequest request) throws Exception {
+
+			parameters = parameters == null ? new HashMap<>() : parameters;
+			parameters.put("in_cod_usu", codUsu);
+			ClassPathResource resource = new ClassPathResource("reportes" + File.separator + reportName + ".jasper");
+			InputStream jasperStream = resource.getInputStream();
+			JasperReport jasperReport = (JasperReport) JRLoader.loadObject(jasperStream);
+			JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, dataSource.getConnection());
+			response.setContentType("application/pdf");
+			response.setHeader("Content-Disposition", "inline;");
+			final OutputStream outputStream = response.getOutputStream();
+			JasperExportManager.exportReportToPdfStream(jasperPrint, outputStream);
+
+		}
+			
 
 }
