@@ -53,13 +53,14 @@
 		<br>
 		<h1 style="color:white; text-align: center; text-shadow: 2px 2px 2px #ea1538;">HISTORIAL DE COMPRAS</h1>
 		<br>
-	<div>
+	<div style="margin-left: 35%; display: flex;">
 		<form action="/reportes/usuario/reporte_historial_compras" method="post" target="_blank">
 			<input type="hidden" name="codusu" th:value="${usuario.codusu}">
 			<button type="submit" class="btn btn-primary">Reporte</button>
 		<!--<a href="/reportes/reporte_historial_compras" target="_blank" class="btn btn-primary">Reporte</a>
 		-->
 		</form>
+		<a href="/perfil/cargar"  type="button" class="btn btn-primary">Volver</a>
 	</div>
 	<div class="formulario" style=" display: flex; justify-content: center;  ">
  		<div class="card mb-12" style="width: 60%; display: flex; justify-content: center;align-items: center; background-color:#251F22 ;">
